@@ -13,8 +13,11 @@ export default {
     theme: {
         extend: {
             fontFamily: {
+                Peshang : ['Peshang'],
+                Rabar : ['Rabar'],
+                Bahij : ['Bahij'],
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
+              }
         },
     },
 

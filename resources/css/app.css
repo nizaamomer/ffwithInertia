@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Peshang";
+    src: url("../js/fonts/Peshang.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rabar";
+    src: url("../js/fonts/Rabar.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Bahij";
+    src: url("../js/fonts/Bahij.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
