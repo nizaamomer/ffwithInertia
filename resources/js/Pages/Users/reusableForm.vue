@@ -24,7 +24,7 @@
                                 />
 
                                 <div
-                                    v-if="!imageUrl && !route.params.id"
+                                    v-if="!imageUrl && !props.user"
                                     id="circleIcon"
                                     class="w-7 h-7 text-emerald-300 bg-center bg-cover bg-no-repeat"
                                 >
@@ -49,7 +49,7 @@
                                     </svg>
                                 </div>
                                 <div
-                                    v-if="!user.image && route.params.id"
+                                    v-if="!user.image && props.user"
                                     id="circleIcon"
                                     class="w-7 h-7 text-center mt-2 text-indigo-300 bg-center bg-cover bg-no-repeat"
                                 >
@@ -153,7 +153,7 @@
                     </div>
 
                     <div
-                        v-show="!$route.params.id"
+                        v-show="!props.user"
                         class="grid md:grid-cols-2 md:gap-6"
                     >
                         <AnimateInput
@@ -182,7 +182,7 @@
                         />
                         <div class="relative z-0 w-full group text-right">
                             <button
-                                v-if="$route.params.id"
+                                v-if="$props.user"
                                 type="submit"
                                 class="text-black font-semibold mt-5 focus:outline-none rounded text-sm w-full px-5 py-2 text-center bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-800"
                             >
@@ -204,40 +204,51 @@
 </template>
 <script setup>
 import { onMounted, reactive, ref } from "vue";
-import Breadcrumb from "@/components/breadcrumb.vue";
-import AnimateInput from "@/components/animateInput.vue";
+import Breadcrumb from "@/Components/breadcrumb.vue";
+import AnimateInput from "@/Components/animateInput.vue";
+import { router, useForm } from "@inertiajs/vue3";
+const props = defineProps(["user", "errors"]);
 const breadcrumbs = [
-    { title: "بەکــارهێنەران", link: "/users" },
+    { title: "بەکــارهێنەران", routeName: "/users" },
     {
-        title: route.params.id
+        title: props.user?.id
             ? "دەستکاریکردنی بەکارهێنەر"
             : "زیادکردنی بەکارهێنەر",
-        link: route.params.id
-            ? `/users/${route.params.id}/edit`
+        routeName: props.user?.id
+            ? `/users/${props.user?.id}/edit`
             : "/users/create",
     },
 ];
-const {
-    errors,
-    storeUser,
-    imageUrl,
-    UpdateUser,
-    handleImageChange,
-    user,
-    showUser,
-    getFirstLetter,
-} = useUsers();
-
+const user = useForm({
+    name: "",
+    email: "",
+    status: "active",
+    phoneNumber: "",
+    isAdmin: "",
+    password: "",
+    password_confirmation: "",
+    image: null,
+});
+const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        user.image = file;
+        imageUrl.value = URL.createObjectURL(file);
+    } else {
+        user.image = null;
+        imageUrl.value = null;
+    }
+};
 onMounted(() => {
-    if (route.params.id) {
-        showUser(route.params.id);
+    if (props.user) {
+        Object.assign(user, props.user);
     }
 });
 const submit = () => {
-    if (route.params.id) {
-        UpdateUser(route.params.id);
+    if (props.user.id) {
+        router.put(route('users.update',props.user.id));
     } else {
-        storeUser();
+        router.store(route('users.store'));
     }
 };
 </script>

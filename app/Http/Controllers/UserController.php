@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Users/reusableForm');
     }
 
     /**
@@ -50,7 +50,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return inertia('Users/reusableForm',[
+            'user' => $user
+        ]);
     }
 
     /**

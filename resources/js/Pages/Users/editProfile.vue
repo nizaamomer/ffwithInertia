@@ -248,18 +248,9 @@
 
 <script setup>
 import { computed, ref, reactive, watch, onMounted } from "vue";
-import { useUserStore } from "@/stores/userStore";
-import useUsers from "@/composables/users";
-const userStore = useUserStore();
-import Input from "@/components/input.vue";
+import Input from "@/Components/input.vue";
 const imageUrl = ref(null);
-const { errors, UpdateProfile, message, error } = useUsers();
-const user = computed(() => ({
-    name: userStore.user?.name || "",
-    email: userStore.user?.email || "",
-    phoneNumber: userStore.user?.phoneNumber || "",
-    image: userStore.user?.fullPathUserImage,
-}));
+defineProps(['user'])
 const form = reactive({
     current_password: "",
     password: "",
