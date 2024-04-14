@@ -203,7 +203,7 @@
     </div>
 </template>
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 import Breadcrumb from "@/Components/breadcrumb.vue";
 import AnimateInput from "@/Components/animateInput.vue";
 import { router, useForm } from "@inertiajs/vue3";
@@ -219,6 +219,29 @@ const breadcrumbs = [
             : "/users/create",
     },
 ];
+const getFirstLetter = (name) => {
+    if (typeof name !== "string") {
+        return "";
+    }
+    const words = name.split(" ");
+    let letter = "";
+    for (const word of words) {
+        letter += word[0]?.toUpperCase();
+    }
+    return letter;
+};
+
+function clearAfterTimeout(value) {
+    if (value) {
+        setTimeout(() => {
+            value.value = "";
+        }, 4000);
+    }
+}
+watch([message, errors, error], () =>
+    clearAfterTimeout(message || errors || error)
+);
+watch(search, searchFunc);
 const user = useForm({
     name: "",
     email: "",
@@ -246,9 +269,9 @@ onMounted(() => {
 });
 const submit = () => {
     if (props.user.id) {
-        router.put(route('users.update',props.user.id));
+        router.put(route("users.update", props.user.id));
     } else {
-        router.store(route('users.store'));
+        router.store(route("users.store"));
     }
 };
 </script>
