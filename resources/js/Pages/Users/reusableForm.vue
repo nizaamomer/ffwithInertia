@@ -206,7 +206,7 @@
 import { onMounted, reactive, ref, watch } from "vue";
 import Breadcrumb from "@/Components/breadcrumb.vue";
 import AnimateInput from "@/Components/animateInput.vue";
-import { router, useForm ,useRemember } from "@inertiajs/vue3";
+import { router, useForm, useRemember } from "@inertiajs/vue3";
 const message = ref("");
 const error = ref("");
 const search = ref("");
@@ -235,16 +235,6 @@ const getFirstLetter = (name) => {
     return letter;
 };
 
-let searchTimeout;
-const searchFunc = () => {
-    users.value = [];
-    if (searchTimeout) {
-        clearTimeout(searchTimeout);
-    }
-    searchTimeout = setTimeout(async () => {
-        await getUsers(search.value);
-    }, 500);
-};
 function clearAfterTimeout(value) {
     if (value) {
         setTimeout(() => {
@@ -255,7 +245,6 @@ function clearAfterTimeout(value) {
 watch([message, props.errors, error], () =>
     clearAfterTimeout(message || props.errors || error)
 );
-watch(search, searchFunc);
 
 const user = useForm({
     name: "",
@@ -267,7 +256,6 @@ const user = useForm({
     password_confirmation: "",
     image: null,
 });
-
 const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -285,7 +273,7 @@ onMounted(() => {
 });
 const submit = () => {
     if (props.user) {
-        router.put(route("users.update", props.user.id),user);
+        router.put(route("users.update", props.user.id), user);
     } else {
         router.post(route("users.store"), user);
     }
