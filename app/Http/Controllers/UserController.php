@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
+    use ImageTrait;
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +22,7 @@ class UserController extends Controller
                 ->latest()
                 ->get()
         );
-       return inertia('Users/Index',['users' => $users]);
+        return inertia('Users/Index', ['users' => $users]);
     }
 
     /**
@@ -32,9 +36,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $data = $request->validated();
+        // $data['user_id'] = auth()->user()->id;
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadImage($request, 'image', 'userImages');
+        }
+        User::create($data);
+        return redirect()->route('users.index')
+        ->with('message', 'user created successfully');
     }
 
     /**
@@ -50,7 +61,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return inertia('Users/reusableForm',[
+        return inertia('Users/reusableForm', [
             'user' => $user
         ]);
     }
@@ -60,7 +71,15 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            if ($user->image) {
+                $this->deleteImage('userImages/' . $user->image);
+            }
+            $data['image'] = $this->uploadImage($request, 'image', 'userImages');
+        }
+        return redirect()->route('users.index')
+        ->with('message', 'user created successfully');
     }
 
     /**
@@ -68,6 +87,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->deleteImage('userImages/' . $user->image);
+        $user->delete();
+        return redirect()->route('users.index')
+        ->with('message', 'user created successfully');
     }
 }

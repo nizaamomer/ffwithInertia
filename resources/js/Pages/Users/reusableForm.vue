@@ -68,10 +68,10 @@
                             </label>
                         </div>
                         <div
-                            v-if="errors.image"
+                            v-if="props.errors.image"
                             class="mt-1 text-sm text-red-400"
                         >
-                            {{ errors.image[0] }}
+                            {{ props.errors.image[0] }}
                         </div>
                     </div>
                     <div class="grid md:grid-cols-2 md:gap-6">
@@ -80,14 +80,14 @@
                             type="text"
                             label="ناوی بەکارهێنەر"
                             v-model="user.name"
-                            :errors="errors.name"
+                            :errors="props.errors.name"
                         />
                         <AnimateInput
                             name="email"
                             type="email"
                             label="ئیمەیڵ"
                             v-model="user.email"
-                            :errors="errors.email"
+                            :errors="props.errors.email"
                         />
                     </div>
                     <div class="grid md:grid-cols-2 md:gap-6">
@@ -113,10 +113,10 @@
                                 </option>
                             </select>
                             <div
-                                v-if="errors.role"
+                                v-if="props.errors.role"
                                 class="mt-1 text-sm text-red-400"
                             >
-                                {{ errors.role[0] }}
+                                {{ props.errors.role[0] }}
                             </div>
                         </div>
                         <div class="relative z-0 w-full mb-6 group">
@@ -144,10 +144,10 @@
                                 </option>
                             </select>
                             <div
-                                v-if="errors.isAdmin"
+                                v-if="props.errors.isAdmin"
                                 class="mt-1 text-sm text-red-400"
                             >
-                                {{ errors.isAdmin[0] }}
+                                {{ props.errors.isAdmin[0] }}
                             </div>
                         </div>
                     </div>
@@ -161,14 +161,14 @@
                             type="password"
                             label="وشەی نهێنی"
                             v-model="user.password"
-                            :errors="errors.password"
+                            :errors="props.errors.password"
                         />
                         <AnimateInput
                             name="password_confirmation"
                             type="password"
                             label=" دووبەرەکردنەوەی وشەی نهێنی"
                             v-model="user.password_confirmation"
-                            :errors="errors.password_confirmation"
+                            :errors="props.errors.password_confirmation"
                         />
                     </div>
 
@@ -178,7 +178,7 @@
                             type="text"
                             label="ژمارەی مۆبایل"
                             v-model="user.phoneNumber"
-                            :errors="errors.phoneNumber"
+                            :errors="props.errors.phoneNumber"
                         />
                         <div class="relative z-0 w-full group text-right">
                             <button
@@ -207,6 +207,11 @@ import { onMounted, reactive, ref, watch } from "vue";
 import Breadcrumb from "@/Components/breadcrumb.vue";
 import AnimateInput from "@/Components/animateInput.vue";
 import { router, useForm } from "@inertiajs/vue3";
+const message = ref("");
+const error = ref("");
+const search = ref("");
+const imageUrl = ref(null);
+
 const props = defineProps(["user", "errors"]);
 const breadcrumbs = [
     { title: "بەکــارهێنەران", routeName: "/users" },
@@ -231,6 +236,16 @@ const getFirstLetter = (name) => {
     return letter;
 };
 
+let searchTimeout;
+    const searchFunc = () => {
+        users.value = [];
+        if (searchTimeout) {
+            clearTimeout(searchTimeout);
+        }
+        searchTimeout = setTimeout(async () => {
+            await getUsers(search.value);
+        }, 500);
+    };
 function clearAfterTimeout(value) {
     if (value) {
         setTimeout(() => {
@@ -238,8 +253,8 @@ function clearAfterTimeout(value) {
         }, 4000);
     }
 }
-watch([message, errors, error], () =>
-    clearAfterTimeout(message || errors || error)
+watch([message, props.errors, error], () =>
+    clearAfterTimeout(message || props.errors || error)
 );
 watch(search, searchFunc);
 const user = useForm({
@@ -268,10 +283,11 @@ onMounted(() => {
     }
 });
 const submit = () => {
-    if (props.user.id) {
-        router.put(route("users.update", props.user.id));
+    if (props.user) {
+        router.put(route("users.update", props.user.id), user);
     } else {
-        router.store(route("users.store"));
+        router.post(route("users.store"), user);
     }
 };
+
 </script>
