@@ -1,13 +1,22 @@
 import { watch } from 'vue';
 
-export default function useClearFlash(flash) {
-    const clearFlash = () => {
-        flash.value = {};
+export default function useClearAfterTimeout(value) {
+    const clearAfterTimeout = () => {
+        if (value.message) {
+            setTimeout(() => {
+                value.message = "";
+            }, 4000);
+        }
+        if (value.error) {
+            setTimeout(() => {
+                value.error = "";
+            }, 4000);
+        }
     };
 
-    watch(flash, () => {
-        if (Object.keys(flash.value).length > 0) {
-            setTimeout(clearFlash, 4000);
-        }
-    });
+    watch(() => [value.message, value.error], clearAfterTimeout);
+
+    return {
+        clearAfterTimeout
+    };
 }

@@ -206,12 +206,11 @@
 import { onMounted, reactive, ref, watch } from "vue";
 import Breadcrumb from "@/Components/breadcrumb.vue";
 import AnimateInput from "@/Components/animateInput.vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { router, useForm ,useRemember } from "@inertiajs/vue3";
 const message = ref("");
 const error = ref("");
 const search = ref("");
 const imageUrl = ref(null);
-
 const props = defineProps(["user", "errors"]);
 const breadcrumbs = [
     { title: "بەکــارهێنەران", routeName: "/users" },
@@ -237,15 +236,15 @@ const getFirstLetter = (name) => {
 };
 
 let searchTimeout;
-    const searchFunc = () => {
-        users.value = [];
-        if (searchTimeout) {
-            clearTimeout(searchTimeout);
-        }
-        searchTimeout = setTimeout(async () => {
-            await getUsers(search.value);
-        }, 500);
-    };
+const searchFunc = () => {
+    users.value = [];
+    if (searchTimeout) {
+        clearTimeout(searchTimeout);
+    }
+    searchTimeout = setTimeout(async () => {
+        await getUsers(search.value);
+    }, 500);
+};
 function clearAfterTimeout(value) {
     if (value) {
         setTimeout(() => {
@@ -257,6 +256,7 @@ watch([message, props.errors, error], () =>
     clearAfterTimeout(message || props.errors || error)
 );
 watch(search, searchFunc);
+
 const user = useForm({
     name: "",
     email: "",
@@ -267,6 +267,7 @@ const user = useForm({
     password_confirmation: "",
     image: null,
 });
+
 const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -284,10 +285,9 @@ onMounted(() => {
 });
 const submit = () => {
     if (props.user) {
-        router.put(route("users.update", props.user.id), user);
+        router.put(route("users.update", props.user.id),user);
     } else {
         router.post(route("users.store"), user);
     }
 };
-
 </script>

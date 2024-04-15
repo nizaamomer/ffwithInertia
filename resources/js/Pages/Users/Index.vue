@@ -11,7 +11,6 @@
                     label="زیادکردنی بەکارهێنەر"
                 />
             </div>
-
             <div
                 v-if="flash.message"
                 id="alert-3"
@@ -251,9 +250,8 @@ import InputSearch from "@/Components/inputSearch.vue";
 import CreateRouteIcon from "@/Components/createRouteIcon.vue";
 import Table from "@/Components/table.vue";
 import useSearch from "@/Composables/searchWatch";
-import useClearFlash from "@/Composables/clearFlash";
+import useClearAfterTimeout from "@/Composables/clearFlash";
 import { router } from "@inertiajs/vue3";
-// const { clearFlash } = useClearFlash();
 const showModal = ref({});
 const breadcrumbs = [{ title: "بەکــارهێنەران", link: "/users" }];
 const props = defineProps(["users", "flash", "search"]);
@@ -261,8 +259,7 @@ const search = ref(props.search);
 const destroy = (id) => {
     router.delete(route("users.destroy", id));
 };
-const ff = ref(props.flash);
-useClearFlash(ff);
-
+const { clearAfterTimeout } = useClearAfterTimeout(props.flash);
+clearAfterTimeout();
 useSearch(search, "users");
 </script>
