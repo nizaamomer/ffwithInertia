@@ -22,9 +22,8 @@
                                     class="w-full h-full absolute inset-0 opacity-0 cursor-pointer"
                                     placeholder=" "
                                 />
-
                                 <div
-                                    v-if="!imageUrl && !props.user"
+                                    v-if="!imageUrl && !user"
                                     id="circleIcon"
                                     class="w-7 h-7 text-emerald-300 bg-center bg-cover bg-no-repeat"
                                 >
@@ -48,8 +47,9 @@
                                         />
                                     </svg>
                                 </div>
+
                                 <div
-                                    v-if="!user.image && props.user"
+                                    v-if="!user.image && user"
                                     id="circleIcon"
                                     class="w-7 h-7 text-center mt-2 text-indigo-300 bg-center bg-cover bg-no-repeat"
                                 >
@@ -62,7 +62,7 @@
                                 <img
                                     v-if="imageUrl || (user && user?.image)"
                                     :src="imageUrl || user.image"
-                                    alt="Preview"
+                                    :alt="user.name"
                                     class="w-full h-full absolute inset-0 object-cover"
                                 />
                             </label>
@@ -71,7 +71,7 @@
                             v-if="props.errors.image"
                             class="mt-1 text-sm text-red-400"
                         >
-                            {{ props.errors.image[0] }}
+                            {{ props.errors.image }}
                         </div>
                     </div>
                     <div class="grid md:grid-cols-2 md:gap-6">
@@ -109,14 +109,14 @@
                                     چالاک
                                 </option>
                                 <option class="bg-emerald-400" value="inactive">
-                                    ناچالەک
+                                    ناچالاک
                                 </option>
                             </select>
                             <div
                                 v-if="props.errors.role"
                                 class="mt-1 text-sm text-red-400"
                             >
-                                {{ props.errors.role[0] }}
+                                {{ props.errors.role }}
                             </div>
                         </div>
                         <div class="relative z-0 w-full mb-6 group">
@@ -147,7 +147,7 @@
                                 v-if="props.errors.isAdmin"
                                 class="mt-1 text-sm text-red-400"
                             >
-                                {{ props.errors.isAdmin[0] }}
+                                {{ props.errors.isAdmin }}
                             </div>
                         </div>
                     </div>
@@ -182,6 +182,7 @@
                         />
                         <div class="relative z-0 w-full group text-right">
                             <button
+                                :disabled="user.processing"
                                 v-if="$props.user"
                                 type="submit"
                                 class="text-black font-semibold mt-5 focus:outline-none rounded text-sm w-full px-5 py-2 text-center bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-800"
@@ -189,6 +190,7 @@
                                 تازەکردنەوە
                             </button>
                             <button
+                                :disabled="user.processing"
                                 v-else
                                 type="submit"
                                 class="text-black font-semibold mt-5 focus:outline-none rounded text-sm w-full px-5 py-2 text-center bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-800"
@@ -202,80 +204,50 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
-import Breadcrumb from "@/Components/breadcrumb.vue";
 import AnimateInput from "@/Components/animateInput.vue";
-import { router, useForm, useRemember } from "@inertiajs/vue3";
-const message = ref("");
-const error = ref("");
-const search = ref("");
-const imageUrl = ref(null);
-const props = defineProps(["user", "errors"]);
+import { router, useForm } from "@inertiajs/vue3";
+import useHandleImage from "@/Composables/HandleImage";
+import useHelperFuncation from "@/Composables/HelperFuncations";
+const props = defineProps(["user", "errors", "flash"]);
+const { getFirstLetter } = useHelperFuncation();
+import Breadcrumb from "@/Components/breadcrumb.vue";
 const breadcrumbs = [
-    { title: "بەکــارهێنەران", routeName: "/users" },
+    { title: "بەکــارهێنەران", link: "/users" },
     {
         title: props.user?.id
             ? "دەستکاریکردنی بەکارهێنەر"
             : "زیادکردنی بەکارهێنەر",
-        routeName: props.user?.id
-            ? `/users/${props.user?.id}/edit`
-            : "/users/create",
+        link: props.user ? `/users/${props.user?.id}/edit` : "/users/create",
     },
 ];
-const getFirstLetter = (name) => {
-    if (typeof name !== "string") {
-        return "";
-    }
-    const words = name.split(" ");
-    let letter = "";
-    for (const word of words) {
-        letter += word[0]?.toUpperCase();
-    }
-    return letter;
-};
-
-function clearAfterTimeout(value) {
-    if (value) {
-        setTimeout(() => {
-            value.value = "";
-        }, 4000);
-    }
-}
-watch([message, props.errors, error], () =>
-    clearAfterTimeout(message || props.errors || error)
-);
-
 const user = useForm({
-    name: "",
-    email: "",
-    status: "active",
-    phoneNumber: "",
-    isAdmin: "",
+    name: props.user?.name || "",
+    email: props.user?.email || "",
+    status: props.user?.status || "active",
+    phoneNumber: props.user?.phoneNumber || "",
+    isAdmin: props.user?.isAdmin || "",
     password: "",
     password_confirmation: "",
-    image: null,
+    image: props.user?.image || null,
 });
-const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        user.image = file;
-        imageUrl.value = URL.createObjectURL(file);
-    } else {
-        user.image = null;
-        imageUrl.value = null;
-    }
-};
-onMounted(() => {
-    if (props.user) {
-        Object.assign(user, props.user);
-    }
-});
+const { handleImageChange, imageUrl } = useHandleImage(user);
+
 const submit = () => {
+    console.log(user);
     if (props.user) {
-        router.put(route("users.update", props.user.id), user);
+        if (!imageUrl.value) {
+            user.image = null;
+        }
+        user.put(route("users.update", props.user.id), {
+            forceFormData: true,
+        });
     } else {
-        router.post(route("users.store"), user);
+        user.post(route("users.store"), {
+            forceFormData: true,
+        });
     }
 };
 </script>

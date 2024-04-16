@@ -7,7 +7,7 @@
             >
                 <InputSearch @searchFunc="searchFunc" v-model.trim="search" />
                 <CreateRouteIcon
-                    routeName="users.create"
+                    routeName="users/create"
                     label="زیادکردنی بەکارهێنەر"
                 />
             </div>
@@ -77,7 +77,9 @@
                                 >
                                     <span
                                         class="font-medium text-normal text-gray-400"
-                                        >{{ "slaw" }}</span
+                                       >
+                                       
+                                       {{ getFirstLetter(user?.name) }}</span
                                     >
                                 </div>
                             </div>
@@ -138,11 +140,8 @@
                         <td
                             class="px-6 py-4 text-center flex justify-evenly space-x-4 rtl:space-x-reverse align-middle"
                         >
-                            <router-link
-                                :to="{
-                                    name: 'user.edit',
-                                    params: { id: user.id },
-                                }"
+                            <Link
+                                :href="`users/${user.id}/edit`"
                             >
                                 <svg
                                     fill="none"
@@ -157,7 +156,7 @@
                                         d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                                     />
                                 </svg>
-                            </router-link>
+                            </Link>
 
                             <button @click="showModal[user.id] = true">
                                 <svg
@@ -251,7 +250,9 @@ import CreateRouteIcon from "@/Components/createRouteIcon.vue";
 import Table from "@/Components/table.vue";
 import useSearch from "@/Composables/searchWatch";
 import useClearAfterTimeout from "@/Composables/clearFlash";
-import { router } from "@inertiajs/vue3";
+import useHelperFuncation from "@/Composables/HelperFuncations";
+import { Link, router } from "@inertiajs/vue3";
+const { getFirstLetter } = useHelperFuncation();
 const showModal = ref({});
 const breadcrumbs = [{ title: "بەکــارهێنەران", link: "/users" }];
 const props = defineProps(["users", "flash", "search"]);

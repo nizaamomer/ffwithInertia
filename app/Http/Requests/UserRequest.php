@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
         $rules = [
             'name' => 'required|min:3',
             'phoneNumber' => 'required',
-            'imageUrl' => 'sometimes|image|mimes:png,jpg,jpeg',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg',
             'status' => 'in:active,inactive',
             'isAdmin' => 'required|boolean',
         ];

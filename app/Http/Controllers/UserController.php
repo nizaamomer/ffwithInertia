@@ -45,7 +45,7 @@ class UserController extends Controller
         }
         User::create($data);
         return redirect()->route('users.index')
-        ->with('message', 'user created successfully');
+            ->with('message', 'user created successfully');
     }
 
     /**
@@ -61,8 +61,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+
         return inertia('Users/reusableForm', [
-            'user' => $user
+            'user' => UserResource::make($user)
         ]);
     }
 
@@ -72,15 +73,18 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $data = $request->validated();
+        info($data);
         if ($request->hasFile('image')) {
             if ($user->image) {
                 $this->deleteImage('userImages/' . $user->image);
             }
             $data['image'] = $this->uploadImage($request, 'image', 'userImages');
         }
+        $user->update($data);
         return redirect()->route('users.index')
-        ->with('message', 'user created successfully');
+            ->with('message', 'User updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -90,6 +94,6 @@ class UserController extends Controller
         $this->deleteImage('userImages/' . $user->image);
         $user->delete();
         return redirect()->route('users.index')
-        ->with('message', 'user created successfully');
+            ->with('message', 'user created successfully');
     }
 }

@@ -12,7 +12,7 @@ trait ImageTrait
     }
     public function deleteImage($imagePath)
     {
-        if (file_exists($imagePath)) {
+        if (is_file($imagePath) && file_exists($imagePath)) {
             unlink($imagePath);
         }
     }
