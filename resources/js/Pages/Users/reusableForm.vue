@@ -183,7 +183,7 @@
                         <div class="relative z-0 w-full group text-right">
                             <button
                                 :disabled="user.processing"
-                                v-if="$props.user"
+                                v-if="props.user"
                                 type="submit"
                                 class="text-black font-semibold mt-5 focus:outline-none rounded text-sm w-full px-5 py-2 text-center bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-800"
                             >
@@ -236,17 +236,30 @@ const user = useForm({
 const { handleImageChange, imageUrl } = useHandleImage(user);
 
 const submit = () => {
-    console.log(user);
+    if (!imageUrl.value) {
+        user.image = null;
+    }
+
     if (props.user) {
-        if (!imageUrl.value) {
-            user.image = null;
-        }
-        user.put(route("users.update", props.user.id), {
+        console.log(user);
+        router.put(route("users.update", props.user.id), props.user, {
             forceFormData: true,
+            onSuccess: () => {
+                console.log("User created successfully");
+            },
+            onError: (error) => {
+                console.error("Error creating user:", error);
+            },
         });
     } else {
-        user.post(route("users.store"), {
+        router.post(route("users.store"), user, {
             forceFormData: true,
+            onSuccess: () => {
+                console.log("User created successfully");
+            },
+            onError: (error) => {
+                console.error("Error creating user:", error);
+            },
         });
     }
 };

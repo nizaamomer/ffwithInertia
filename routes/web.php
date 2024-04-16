@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -24,6 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::resource('users',UserController::class)->names('users');
+Route::apiResource('users', UserController::class)->names('users')->except('show');
+Route::apiResource('categories', CategoryController::class)->names('categories');
+Route::put('category/update-order', [CategoryController::class, 'updateCategoryOrder']);
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';
