@@ -19,8 +19,7 @@ class CategoryController extends Controller
     {
 
         $categories = CategoryResource::collection(
-            Category::with('foods')
-                ->OfSearch($request->search)
+            Category::OfSearch($request->search)
                 ->orderBy('order', 'asc')
                 ->orderBy('status', 'asc')
                 ->get()

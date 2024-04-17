@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\InvoicResource;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,10 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $invoices = InvoicResource::collection(Invoice::OfSearch($request->search)->paginate(10));
+        return inertia('Invoices/Index', ['invoices' => $invoices]);
     }
 
     /**
@@ -36,7 +38,8 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        $invoice->load('invoiceItems');
+        return InvoicResource::make($invoice);
     }
 
     /**
