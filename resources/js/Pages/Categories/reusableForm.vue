@@ -1,27 +1,27 @@
 <template>
-    <div class="w-full md:w-8/12 px-5 md:px-0 mx-auto">
+    <div class="w-full px-5 mx-auto md:w-8/12 md:px-0">
         <Breadcrumb :items="breadcrumbs" />
 
         <div
             class="bg-slate-800 w-full mx-auto text-gray-300 rounded text-center text-base py-1 px-3 h-[86vh] flex flex-col justify-center overflow-auto"
         >
             <form
-                class="md:w-3/4 w-full mx-auto shadow-2xl px-8 py-2 rounded bg-indigo-800"
+                class="w-full px-8 py-2 mx-auto bg-indigo-800 rounded shadow-2xl md:w-3/4"
                 @submit.prevent="save"
                 enctype="multipart/form-data"
             >
-                <div class="mb-6 w-auto">
+                <div class="w-auto mb-6">
                     <div
                         class="bg-[#1f1d2bb6] rounded-full border-2 w-32 md:w-44 h-32 md:h-44 mx-auto border-dashed border-gray-500 flex flex-col items-center justify-between"
                     >
                         <label
-                            class="flex flex-cola items-center cursor-pointer relative rounded-full justify-center h-full"
+                            class="relative flex items-center justify-center h-full rounded-full cursor-pointer flex-cola"
                         >
                             <img
                                 v-if="category.image || imageUrl"
                                 :src="imageUrl ? imageUrl : category.image"
                                 alt="Preview"
-                                class="object-contain cursor-pointer w-32 md:w-44 h-32 md:h-44 rounded-full"
+                                class="object-contain w-32 h-32 rounded-full cursor-pointer md:w-44 md:h-44"
                             />
                             <svg
                                 v-if="!imageUrl"
@@ -40,7 +40,7 @@
                             <input
                                 @change="handleImageChange"
                                 @focus="props.errors = ''"
-                                class="opacity-0 rounded-full cursor-pointer h-full w-40 absolute"
+                                class="absolute w-40 h-full rounded-full opacity-0 cursor-pointer"
                                 type="file"
                             />
                         </label>
@@ -63,7 +63,7 @@
                 <div class="mb-6">
                     <select
                         v-model="category.status"
-                        class="w-full py-2 bg-gray-800 px-2 border-dashed border-gray-500 border placeholder:text-gray-200 text-gray-400 text-sm rounded-lg focus:ring-rose-500 focus:border-none"
+                        class="w-full px-2 py-2 text-sm text-gray-400 bg-gray-800 border border-gray-500 border-dashed rounded-lg placeholder:text-gray-200 focus:ring-rose-500 focus:border-none"
                     >
                         <option value="active">چـالاک</option>
                         <option value="inactive">نـا چــالاک</option>
@@ -77,12 +77,12 @@
                 </div>
 
                 <div
-                    class="relative z-0 mb-2 text-center justify-evenly items-center block md:flex md:space-x-4 w-full mt-5 space-y-4 md:space-y-auto"
+                    class="relative z-0 items-center block w-full mt-5 mb-2 space-y-4 text-center justify-evenly md:flex md:space-x-4 md:space-y-auto"
                 >
                     <button
                         type="submit"
                         :disabled="category.processing"
-                        class="bg-gray-900 border border-rose-600 text-gray-400 hover:bg-gray-950 mt-4 shadow-md focus:outline-none font-medium rounded text-sm sm:w-1/3 w-3/4 px-5 py-2 text-center"
+                        class="w-3/4 px-5 py-2 mt-4 text-sm font-medium text-center text-gray-400 bg-gray-900 border rounded shadow-md border-rose-600 hover:bg-gray-950 focus:outline-none sm:w-1/3"
                     >
                         <span v-if="props.category">تازەکردنەوە</span>
                         <span v-else>زیــادکردن</span>
@@ -92,7 +92,7 @@
                         :disabled="category.processing"
                         type="button"
                         @click.prevent="destroyCategory"
-                        class="bg-rose-700 border border-gray-900 text-gray-300 hover:bg-rose-600 shadow-md focus:outline-none font-medium rounded text-sm sm:w-1/3 w-3/4 px-5 py-2 text-center"
+                        class="w-3/4 px-5 py-2 text-sm font-medium text-center text-gray-300 border border-gray-900 rounded shadow-md bg-rose-700 hover:bg-rose-600 focus:outline-none sm:w-1/3"
                     >
                         سڕیـنـەوە
                     </button>
@@ -102,12 +102,11 @@
     </div>
 </template>
 <script setup>
-import useCategories from "@/composables/categories";
 import { onMounted, ref } from "vue";
-import BorderInput from "@/components/borderInput.vue";
+import BorderInput from "@/Components/borderInput.vue";
 import useHandleImage from "@/Composables/HandleImage";
 
-import Breadcrumb from "@/components/breadcrumb.vue";
+import Breadcrumb from "@/Components/breadcrumb.vue";
 import { router } from "@inertiajs/vue3";
 const props = defineProps(["category", "errors", "flash"]);
 

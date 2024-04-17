@@ -1,12 +1,12 @@
 <template>
     <div>
         <div
-            class="min-h-screen bg-gray-100 dark:bg-gray-900 flex justify-start"
+            class="flex justify-start min-h-screen bg-gray-100 dark:bg-gray-900"
             dir="rtl"
         >
             <button
                 @click="toggleSidebar"
-                class="absolute w-full bg-slate-950 top-0 py-2 ms-10 md:hidden text-start block"
+                class="absolute top-0 block w-full py-2 bg-slate-950 ms-10 md:hidden text-start"
             >
                 <svg
                     class="w-7 h-7 fill-white"
@@ -39,7 +39,7 @@
                 <!--  pl-8 pr-2    ama la bchukaka la adain-->
                 <button @click="toggleAside" class="absolute top-2 left-2">
                     <svg
-                        class="md:inline hidden"
+                        class="hidden md:inline"
                         :class="asideShow ? 'rotate-180' : ''"
                         fill="#bdbaba"
                         width="25"
@@ -68,34 +68,34 @@
                 </button>
 
                 <div
-                    class="flex items-center text-center justify-center px-8"
+                    class="flex items-center justify-center px-8 text-center"
                     :class="asideShow ? '' : ''"
                 >
                     <div
                         @click="toggleFullscreen"
-                        class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-800/70"
+                        class="flex items-center justify-center w-12 h-12 rounded-full bg-slate-800/70"
                     >
                         <!-- v-if="user && user?.image" -->
                         <img
                             v-if="user?.image"
                             :src="user.fullPathUserImage"
                             :alt="user?.name"
-                            class="object-cover h-12 w-12 rounded-full"
+                            class="object-cover w-12 h-12 rounded-full"
                         />
                         <div
                             v-else
                             id="circleIcon"
-                            class="w-7 h-7 text-center mt-2 text-indigo-300 bg-center bg-cover bg-no-repeat"
+                            class="mt-2 text-center text-indigo-300 bg-center bg-no-repeat bg-cover w-7 h-7"
                         >
                             slaw
                         </div>
                     </div>
                     <div
                         v-if="asideShow"
-                        class="flex flex-1 flex-col space-y-1"
+                        class="flex flex-col flex-1 space-y-1"
                     >
                         <div
-                            class="font-medium text-sm leading-tight text-gray-200"
+                            class="text-sm font-medium leading-tight text-gray-200"
                         >
                             {{ auth }}
                             {{ user?.name }}
@@ -103,13 +103,13 @@
                         <div class="text-xs text-gray-400">
                             <span
                                 v-if="user?.isAdmin"
-                                class="bg-indigo-700 text-indigo-100 rounded-xl px-2"
+                                class="px-2 text-indigo-100 bg-indigo-700 rounded-xl"
                             >
                                 ئەدمین
                             </span>
                             <span
                                 v-else
-                                class="bg-rose-700 text-rose-100 rounded-xl px-2"
+                                class="px-2 bg-rose-700 text-rose-100 rounded-xl"
                             >
                                 کاشێر
                             </span>
@@ -117,17 +117,17 @@
                     </div>
                 </div>
                 <div
-                    class="mt-10 flex flex-1 flex-col gap-3 px-4 text-slate-400 text-sm overflow-auto"
+                    class="flex flex-col flex-1 gap-3 px-4 mt-10 overflow-auto text-sm text-slate-400"
                 >
                     <Link
                         :href="{ name: 'pos.index' }"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5"
-                        active-class="bg-slate-800 text-indigo-500"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl"
+                        active-class="text-indigo-500 bg-slate-800"
                     >
                         <div>
                             <svg
                                 fill="currentColor"
-                                class="h-6 w-6"
+                                class="w-6 h-6"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 64 64"
                             >
@@ -144,8 +144,8 @@
                     <Link
                         v-show="user?.isAdmin"
                         :href="{ name: 'dashboard.index' }"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
                         <div>
                             <svg
@@ -171,22 +171,22 @@
                     </Link>
                     <Link
                         :href="{ name: 'profile' }"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
-                        <i class="fa-regular fa-circle-user text-xl"></i>
+                        <i class="text-xl fa-regular fa-circle-user"></i>
                         <div v-if="asideShow">ئەکاونتەکەم</div>
                     </Link>
 
                     <Link
-                        :href="{ name: 'category.index' }"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                    :href="route('categories.index')"
+                                            active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
                         <div>
                             <svg
                                 fill="currentColor"
-                                class="h-6 w-6"
+                                class="w-6 h-6"
                                 viewBox="0 0 64 64"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
@@ -216,22 +216,22 @@
                     </Link>
                     <Link
                         :href="{ name: 'food.index' }"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
-                        <i class="fa-solid fa-utensils text-xl"></i>
+                        <i class="text-xl fa-solid fa-utensils"></i>
 
                         <div
                             v-if="asideShow"
-                            class="flex flex-1 justify-between"
+                            class="flex justify-between flex-1"
                         >
                             <div>خـــواردنـەکان</div>
                         </div>
                     </Link>
                     <Link
                         :href="{ name: 'offer.index' }"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
                         <div>
                             <svg
@@ -240,7 +240,7 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="h-6 w-6"
+                                class="w-6 h-6"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -251,21 +251,21 @@
                         </div>
                         <div
                             v-if="asideShow"
-                            class="flex flex-1 justify-between"
+                            class="flex justify-between flex-1"
                         >
                             <div>ئــۆفــەرەکان</div>
                         </div>
                     </Link>
-                        <!-- v-show="user?.isAdmin" -->
+                    <!-- v-show="user?.isAdmin" -->
                     <Link
                         :href="route('users.index')"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
                         <div>
                             <svg
                                 fill="currentColor"
-                                class="h-6 w-6"
+                                class="w-6 h-6"
                                 viewBox="0 0 64 64"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
@@ -293,12 +293,12 @@
                     </Link>
                     <Link
                         :href="{ name: 'invoice.index' }"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
                         <div>
                             <svg
-                                class="h-6 w-6"
+                                class="w-6 h-6"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -323,8 +323,8 @@
                     </Link>
                     <Link
                         :href="{ name: 'expense.index' }"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
                         <div>
                             <svg
@@ -354,10 +354,10 @@
                     <Link
                         v-show="user?.isAdmin"
                         :href="{ name: 'report.invoices' }"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
-                        <i class="fa-regular fa-file-pdf text-xl"></i>
+                        <i class="text-xl fa-regular fa-file-pdf"></i>
 
                         <div v-if="asideShow">ڕاپــۆرتەکان</div>
                     </Link>
@@ -367,8 +367,8 @@
                 >
                     <button
                         @click="logout"
-                        active-class="bg-slate-800 text-indigo-500"
-                        class="flex items-center gap-3 rounded-xl py-3 px-5 hover:bg-slate-800"
+                        active-class="text-indigo-500 bg-slate-800"
+                        class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
                         <div>
                             <svg
@@ -377,7 +377,7 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="h-6 w-6"
+                                class="w-6 h-6"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -390,8 +390,8 @@
                     </button>
                 </div>
             </aside>
-            <main class="w-full h-full overflow-y-auto pb-4">
-                <slot ></slot>
+            <main class="w-full h-full pb-4 overflow-y-auto">
+                <slot></slot>
             </main>
         </div>
     </div>

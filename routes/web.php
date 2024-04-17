@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\{CategoryController, ProfileController, UserController, FoodController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,8 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::apiResource('users', UserController::class)->names('users')->except('show');
-Route::apiResource('categories', CategoryController::class)->names('categories');
+Route::apiResource('users', UserController::class)->except('show');
+Route::apiResource('categories', CategoryController::class);
+Route::apiResource('foods', FoodController::class);
+Route::get('getCategories', [FoodController::class, 'getCategories']);
+
+
 Route::put('category/update-order', [CategoryController::class, 'updateCategoryOrder']);
 
 

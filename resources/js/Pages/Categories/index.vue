@@ -1,15 +1,12 @@
 <template>
     <div class="mx-5">
         <Breadcrumb :items="breadcrumbs" />
-        <div class="sm:flex block items-center justify-between mb-1">
+        <div class="items-center justify-between block mb-1 sm:flex">
             <div
-                class="flex items-center space-x-3 rtl:space-x-reverse my-5 sm:my-0 justify-center"
+                class="flex items-center justify-center my-5 space-x-3 rtl:space-x-reverse sm:my-0"
             >
                 <InputSearch @searchFunc="searchFunc" v-model.trim="search" />
-                <CreateRouteIcon
-                    routeName="category/create"
-                    label="زیادکردنی پۆل"
-                />
+                <CreateRouteIcon routeName="category/create" label="زیادکردنی پۆل" />
             </div>
             <div
                 v-if="flash.message"
@@ -29,7 +26,7 @@
                     />
                 </svg>
                 <span class="sr-only">Info</span>
-                <div class="ms-3 text-sm font-medium">
+                <div class="text-sm font-medium ms-3">
                     {{ flash.message }}
                 </div>
             </div>
@@ -42,7 +39,7 @@
             >
                 <table class="w-full text-sm text-center text-gray-400">
                     <thead
-                        class="text-sm text-gray-500 sticky top-0 uppercase bg-gray-900"
+                        class="sticky top-0 text-sm text-gray-500 uppercase bg-gray-900"
                     >
                         <tr>
                             <th scope="col" class="px-3 py-3">ڕیــزبەنــدی</th>
@@ -66,12 +63,12 @@
                     >
                         <template #item="{ element }">
                             <tr
-                                class="bg-slate-900 border-b border-indigo-500 hover:border-y-2 hover:border-rose-800 w-full"
+                                class="w-full border-b border-indigo-500 bg-slate-900 hover:border-y-2 hover:border-rose-800"
                             >
                                 <td scope="row" class="px-3 py-1 text-center">
                                     <button class="drag-handle">
                                         <svg
-                                            class="text-gray-400 hover:text-indigo-600 mx-auto"
+                                            class="mx-auto text-gray-400 hover:text-indigo-600"
                                             fill="currentColor"
                                             width="32"
                                             height="32"
@@ -100,11 +97,11 @@
                                 </td>
                                 <td
                                     scope="row"
-                                    class="px-3 py-1 font-medium whitespace-nowrap text-white"
+                                    class="px-3 py-1 font-medium text-white whitespace-nowrap"
                                 >
                                     <img
                                         :src="element.image"
-                                        class="h-20 w-20 object-contain mx-auto"
+                                        class="object-contain w-20 h-20 mx-auto"
                                     />
                                 </td>
                                 <td class="px-3 py-1">
@@ -133,7 +130,7 @@
                                             name: 'category.edit',
                                             params: { id: element.id },
                                         }"
-                                        class="flex justify-center items-center rounded-lg bg-indigo-950 text-indigo-400 w-full h-8"
+                                        class="flex items-center justify-center w-full h-8 text-indigo-400 rounded-lg bg-indigo-950"
                                     >
                                         <svg
                                             width="20"
@@ -160,31 +157,31 @@
 </template>
 
 <script setup>
-import draggable from "vuedraggable";
-import Breadcrumb from "@/components/breadcrumb.vue";
-import InputSearch from "@/components/inputSearch.vue";
-import CreateRouteIcon from "@/components/createRouteIcon.vue";
-import useSearch from "@/Composables/searchWatch";
+// import draggable from "vuedraggable";
+// import Breadcrumb from "@/Components/breadcrumb.vue";
+// import InputSearch from "@/Components/inputSearch.vue";
+// import CreateRouteIcon from "@/Components/createRouteIcon.vue";
+// import useSearch from "@/Composables/searchWatch";
 
-import { onMounted } from "vue";
-const props = defineProps(["categories", "flash", "search"]);
-import useClearAfterTimeout from "@/Composables/clearFlash";
-import { Link, router } from "@inertiajs/vue3";
+// import { onMounted } from "vue";
+// const props = defineProps(["categories", "flash", "search"]);
+// import useClearAfterTimeout from "@/Composables/clearFlash";
+// import { Link, router } from "@inertiajs/vue3";
 
-const search = ref(props.search);
-const breadcrumbs = [{ title: "پۆلــەکان", link: "/categories" }];
+// const search = ref(props.search);
+// const breadcrumbs = [{ title: "پۆلــەکان", link: "/categories" }];
 
-onMounted(async () => {
-    await getCategories();
-});
-const onDragEnd = (evt) => {
-    const newOrder = categories.value.map((category) => category.id);
-    router.put("category/update-order", {
-        order: newOrder,
-    });
-};
+// onMounted(async () => {
+//     await getCategories();
+// });
+// const onDragEnd = (evt) => {
+//     const newOrder = categories.value.map((category) => category.id);
+//     router.put("category/update-order", {
+//         order: newOrder,
+//     });
+// };
 
-const { clearAfterTimeout } = useClearAfterTimeout(props.flash);
-clearAfterTimeout();
-useSearch(search, "categories");
+// const { clearAfterTimeout } = useClearAfterTimeout(props.flash);
+// clearAfterTimeout();
+// useSearch(search, "categories");
 </script>
