@@ -1,12 +1,12 @@
 <template>
-    <div class="w-full lg:w-4/6   mx-auto">
+    <div class="w-full mx-auto lg:w-4/6">
         <Breadcrumb :items="breadcrumbs" />
         <div
             class="bg-slate-800 h-[90vh] flex flex-col justify-center overflow-hidden  text-gray-300 rounded text-center text-base py-1 px-3"
         >
-            <div class="relative h-full overflow-x-auto space-y-4 py-2">
+            <div class="relative h-full py-2 space-y-4 overflow-x-auto">
                 <div
-                    class="grid grid-cols-1 sm:grid-cols-2 text-gray-900 gap-x-10 gap-y-6 bg-gray-300 p-4 rounded-md text-center"
+                    class="grid grid-cols-1 p-4 text-center text-gray-900 bg-gray-300 rounded-md sm:grid-cols-2 gap-x-10 gap-y-6"
                 >
                     <div
                         class="flex items-center justify-start space-x-3 space-x-reverse"
@@ -35,7 +35,7 @@
                     >
                         <p class="text-gray-500">نــرخی گــشتی:</p>
                         <span class="font-semibold"
-                            ><span class="text-rose-600 line-through">{{
+                            ><span class="line-through text-rose-600">{{
                                 offer.totalAmount
                             }}</span>
                             د.ع</span
@@ -69,7 +69,7 @@
                         </span>
                     </div>
                     <div
-                        class="col-span-full flex items-center justify-start space-x-5 space-x-reverse"
+                        class="flex items-center justify-start space-x-5 space-x-reverse col-span-full"
                     >
                         <p class="text-gray-500">تێبینی:</p>
                         <span>{{
@@ -86,7 +86,7 @@
                     خــواردنەکان
                 </h1>
                 <div
-                    class="bg-slate-800 text-gray-900 pb-2 rounded grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-center text-base gap-2 overflow-auto"
+                    class="grid grid-cols-2 gap-2 pb-2 overflow-auto text-base text-center text-gray-900 rounded bg-slate-800 md:grid-cols-3 lg:grid-cols-4"
                 >
                     <div
                         v-for="item in offer.items"
@@ -94,17 +94,17 @@
                         class="flex items-center justify-start w-full"
                     >
                         <div
-                            class="h-40 w-full relative flex flex-col justify-end cursor-pointer"
+                            class="relative flex flex-col justify-end w-full h-40 cursor-pointer"
                         >
                             <img
                                 :src="item.food.image"
-                                class="h-24 object-cover absolute rounded-full left-0 right-0 mx-auto top-0 z-50"
+                                class="absolute top-0 left-0 right-0 z-50 object-cover h-24 mx-auto rounded-full"
                             />
                             <div
-                                class="h-4/5 w-full relative bg-gray-300 rounded-lg pt-16 text-center space-y-1 shadow-2xl"
+                                class="relative w-full pt-16 space-y-1 text-center bg-gray-300 rounded-lg shadow-2xl h-4/5"
                             >
                                 <p
-                                    class="absolute top-0 left-0 bg-rose-500 shadow-lg font-semibold text-gray-200 px-2 py-1 rounded-br rounded-tl text-sm"
+                                    class="absolute top-0 left-0 px-2 py-1 text-sm font-semibold text-gray-200 rounded-tl rounded-br shadow-lg bg-rose-500"
                                 >
                                     {{ item.quantity }}X
                                 </p>
@@ -112,7 +112,7 @@
                                     {{ item.food.name }}
                                 </h1>
                                 <h1
-                                    class="text-base text-indigo-500 font-semibold"
+                                    class="text-base font-semibold text-indigo-500"
                                 >
                                     {{ item.food.price }} د.ع
                                 </h1>
@@ -125,10 +125,9 @@
     </div>
 </template>
 <script setup>
-import { useRoute } from "vue-router";
+
 import { onMounted, ref } from "vue";
-import useOffers from "@/composables/offers";
-import Breadcrumb from "@/components/breadcrumb.vue";
+import Breadcrumb from "@/Components/breadcrumb.vue";
 const route = useRoute();
 const breadcrumbs = [
     { title: "ئۆفەرەکان", link: "/offers" },

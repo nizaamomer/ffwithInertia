@@ -128,20 +128,17 @@
 </template>
 
 <script setup>
-const appUrl = import.meta.env.VITE_APP_URL;
 import InputSearch from "@/Components/inputSearch.vue";
 import Breadcrumb from "@/Components/breadcrumb.vue";
 const breadcrumbs = [{ title: "خواردنەکان", link: "/foods" }];
-const {
-    getFoods,
-    foods,
-    message,
-    search,
-    searchFunc,
-    getFoodByCategory,
-    showAll,
-} = useFoods();
-const { getCategories, categories } = useCategories();
-getCategories();
-getFoods();
+
+    // getFoods,
+    // foods,
+    // message,
+    // search,
+    // searchFunc,
+    // getFoodByCategory,
+    // showAll,
+
+
 </script>

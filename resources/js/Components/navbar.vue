@@ -382,7 +382,7 @@
 </template>
 <script setup>
 import { useUserStore } from "@/stores/userStore";
-import useUsers from "@/composables/users";
+import useUsers from "@/Composables/users";
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();

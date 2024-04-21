@@ -2,7 +2,7 @@
 
 <template>
 	<div
-		class="bg-slate-900 min-h-screen overflow-auto w-full flex flex-col justify-center"
+		class="flex flex-col justify-center w-full min-h-screen overflow-auto bg-slate-900"
 	>
 		<div
 			class="bg-slate-700 w-full h-[98vh] grid grid-cols-5 mx-auto text-gray-300 rounded overflow-hidden text-center text-base"
@@ -11,9 +11,9 @@
 				class="bg-slate-900/90 text-gray-300 col-span-full lg:col-span-3 px-1.5 overflow-auto"
 			>
 				<div
-					class="block lg:flex space-y-2 lg:space-y-0 items-center justify-between min-w-full pb-3"
+					class="items-center justify-between block min-w-full pb-3 space-y-2 lg:flex lg:space-y-0"
 				>
-					<div class="flex justify-start items-center text-xl me-10" dir="ltr">
+					<div class="flex items-center justify-start text-xl me-10" dir="ltr">
 						{{ currentTime }}
 					</div>
 					<div class="w-full lg:w-auto">
@@ -34,12 +34,12 @@
 			</div>
 
 			<div
-				class="bg-gray-900 text-gray-300 flex flex-col justify-between h-full col-span-full lg:col-span-2 overflow-auto"
+				class="flex flex-col justify-between h-full overflow-auto text-gray-300 bg-gray-900 col-span-full lg:col-span-2"
 			>
 				<div class="relative overflow-x-auto shadow-md sm:rounded-lg h-fit">
 					<table class="w-full text-sm text-right text-gray-500">
 						<thead
-							class="text-xs text-center text-rose-500 sticky top-0 uppercase bg-gray-800"
+							class="sticky top-0 text-xs text-center uppercase bg-gray-800 text-rose-500"
 						>
 							<tr>
 								<th scope="col" class="px-5 py-3">جۆری خواردن</th>
@@ -53,18 +53,18 @@
 							<tr
 								v-for="item in cartItems"
 								:key="item.id"
-								class="bg-slate-900 border-b border-gray-500 text-center text-gray-300 hover:bg-gray-900"
+								class="text-center text-gray-300 border-b border-gray-500 bg-slate-900 hover:bg-gray-900"
 							>
 								<th
 									scope="row"
-									class="ps-2 py-3 w-1/5 font-medium text-left rtl:text-right text-gray-300"
+									class="w-1/5 py-3 font-medium text-left text-gray-300 ps-2 rtl:text-right"
 								>
-									<div class="overflow-auto whitespace-nowrap w-24">
+									<div class="w-24 overflow-auto whitespace-nowrap">
 										{{ item.name }}
 									</div>
 								</th>
 
-								<td class="px-2 py-3 flex justify-center items-center">
+								<td class="flex items-center justify-center px-2 py-3">
 									<button
 										@click="
 											cartStore.decreaseQuantity({
@@ -72,7 +72,7 @@
 												type: item.type,
 											})
 										"
-										class="bg-red-300 text-red-700 rounded p-1 cursor-pointer"
+										class="p-1 text-red-700 bg-red-300 rounded cursor-pointer"
 									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@
 												type: item.type,
 											})
 										"
-										class="bg-blue-300 text-blue-700 rounded p-1 cursor-pointer"
+										class="p-1 text-blue-700 bg-blue-300 rounded cursor-pointer"
 									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +156,7 @@
 											viewBox="0 0 24 24"
 											stroke-width="1.5"
 											stroke="currentColor"
-											class="sm:w-5 sm:h-5 w-4 h-4 text-red-500 cursor-pointer hover:text-red-600"
+											class="w-4 h-4 text-red-500 cursor-pointer sm:w-5 sm:h-5 hover:text-red-600"
 										>
 											<path
 												stroke-linecap="round"
@@ -170,7 +170,7 @@
 
 							<!-- <tr>
 								<div
-									class="text-gray-400 text-center absolute top-36 left-1/2 transform -translate-x-1/2 text-sm"
+									class="absolute text-sm text-center text-gray-400 transform -translate-x-1/2 top-36 left-1/2"
 								>
 									هیچ خواردننێک زیاد نەکراوە
 								</div>
@@ -181,7 +181,7 @@
 
 				<form
 					@submit.prevent="payment"
-					class="bg-slate-950 rounded-t-md p-2 space-y-4 h-fit py-4 pb-8 overflow-hidden"
+					class="p-2 py-4 pb-8 space-y-4 overflow-hidden bg-slate-950 rounded-t-md h-fit"
 				>
 					<div class="flex justify-between px-2">
 						<div>
@@ -199,7 +199,7 @@
 							</div>
 							<p
 								v-if="form.discount > totalFoodAmount"
-								class="text-xs text-red-400 py-1 text-right"
+								class="py-1 text-xs text-right text-red-400"
 							>
 								تکایە نابێت داشکاندن زیاتر بێت لە بڕی گشتی
 							</p>
@@ -219,7 +219,7 @@
 					</div>
 					<div class="flex justify-between h-full">
 						<div v-if="offers" class="overflow-auto">
-							<h1 class="text-gray-400 mb-2">وەجبــەکــان</h1>
+							<h1 class="mb-2 text-gray-400">وەجبــەکــان</h1>
 							<div class="grid grid-cols-2 gap-1">
 								<div v-for="offer in offers" :key="offer.id">
 									<div
@@ -233,13 +233,13 @@
 												})
 											"
 											type="button"
-											class="w-full text-sm font-medium whitespace-nowrap rtl:ml-2 text-gray-300 focus:outline-none"
+											class="w-full text-sm font-medium text-gray-300 whitespace-nowrap rtl:ml-2 focus:outline-none"
 										>
 											{{ offer.name }}
 										</button>
 										<div
 											type="button"
-											class="text-black text-center"
+											class="text-center text-black"
 											@click="selectOffer(offer)"
 										>
 											<svg
@@ -275,7 +275,7 @@
 										</div>
 									</div>
 									<div
-										class="flex flex-col h-full rounded py-1 px-2 w-24 overflow-x-auto"
+										class="flex flex-col w-24 h-full px-2 py-1 overflow-x-auto rounded"
 									>
 										<div
 											v-if="selectedOffer === offer && isOfferSectionVisible"
@@ -290,17 +290,17 @@
 												:key="item.id"
 											>
 												<div
-													class="h-32 w-32 relative flex flex-col space-y-3 justify-end"
+													class="relative flex flex-col justify-end w-32 h-32 space-y-3"
 												>
 													<img
 														:src="item.food.fullPathFoodImage"
-														class="h-14 object-contain z-50 absolute left-0 right-0 mx-auto top-0"
+														class="absolute top-0 left-0 right-0 z-50 object-contain mx-auto h-14"
 													/>
 													<div
-														class="h-4/5 w-full bg-gray-900 rounded-lg relative pt-9 text-center space-y-1 shadow-xl"
+														class="relative w-full space-y-1 text-center bg-gray-900 rounded-lg shadow-xl h-4/5 pt-9"
 													>
 														<span
-															class="bg-rose-500 text-black p-1 leading-4 font-semibold text-center rounded-tl-md rounded-br-md text-xs absolute top-0 left-0"
+															class="absolute top-0 left-0 p-1 text-xs font-semibold leading-4 text-center text-black bg-rose-500 rounded-tl-md rounded-br-md"
 															>{{ item.quantity }}X</span
 														>
 
@@ -319,13 +319,13 @@
 							</div>
 						</div>
 						<div
-							class="flex flex-col justify-start items-center space-y-3 py-1 overflow-auto w-2/5 ps-2"
+							class="flex flex-col items-center justify-start w-2/5 py-1 space-y-3 overflow-auto ps-2"
 						>
 							<div class="flex items-center justify-between w-full">
 								<h1 class="text-gray-400">پــرنت؟</h1>
 								<select
 									v-model="form.print"
-									class="py-2 mx-3 bg-emerald-800 text-center border-none text-sm font-medium whitespace-nowrap rtl:ml-2 text-white focus:outline-none rounded-lg"
+									class="py-2 mx-3 text-sm font-medium text-center text-white border-none rounded-lg bg-emerald-800 whitespace-nowrap rtl:ml-2 focus:outline-none"
 								>
 									<option :value="false">نـــەخێر</option>
 									<option :value="true">بــەڵێ</option>
@@ -333,7 +333,7 @@
 							</div>
 							<button
 								type="submit"
-								class="py-2 px-14 w-full text-sm font-medium whitespace-nowrap rtl:ml-2 text-white focus:outline-none rounded-lg"
+								class="w-full py-2 text-sm font-medium text-white rounded-lg px-14 whitespace-nowrap rtl:ml-2 focus:outline-none"
 								:class="{
 									' bg-yellow-900 cursor-not-allowed': form.discount > totalFoodAmount,
 									' bg-yellow-800 hover:bg-yellow-900 cursor-pointer ':
@@ -347,7 +347,7 @@
 
 							<button
 								type="submit"
-								class="py-2 px-10 w-full text-sm font-medium whitespace-nowrap rtl:ml-2 text-white focus:outline-none rounded-lg"
+								class="w-full px-10 py-2 text-sm font-medium text-white rounded-lg whitespace-nowrap rtl:ml-2 focus:outline-none"
 								:class="{
 									' bg-indigo-900 cursor-not-allowed': form.discount > totalFoodAmount,
 									' bg-indigo-800 hover:bg-indigo-900 cursor-pointer ':
@@ -360,7 +360,7 @@
 							</button>
 							<button
 								type="submit"
-								class="py-2 w-full px-10 text-sm font-medium whitespace-nowrap rtl:ml-2 text-white focus:outline-none rounded-lg"
+								class="w-full px-10 py-2 text-sm font-medium text-white rounded-lg whitespace-nowrap rtl:ml-2 focus:outline-none"
 								:class="{
 									' bg-rose-900 cursor-not-allowed': form.discount > totalFoodAmount,
 									' bg-rose-800 hover:bg-rose-900 cursor-pointer ':
@@ -381,20 +381,20 @@
 	<!-- <div
         v-if="invoice.id"
         id="invoiceContent"
-        class="relative max-w-md bg-slate-900 text-gray-300 hidden rounded-lg shadow p-3 mx-auto space-y-3 rtl:text-right"
+        class="relative hidden max-w-md p-3 mx-auto space-y-3 text-gray-300 rounded-lg shadow bg-slate-900 rtl:text-right"
     >
         <div>
             <h1
-                class="text-base text-md text-center leading-relaxed text-indigo-500"
+                class="text-base leading-relaxed text-center text-indigo-500 text-md"
             >
                 بــەخێربێن بۆ فــاست فوودی یــۆناس
             </h1>
-            <p class="leading-relaxed text-gray-500 text-center">
+            <p class="leading-relaxed text-center text-gray-500">
                 ژمــارەی وەســڵ: {{ invoice.id }}
             </p>
         </div>
         <ul
-            class="max-w-md divide-y divide-gray-200 leading-relaxed text-gray-500 text-sm text-right"
+            class="max-w-md text-sm leading-relaxed text-right text-gray-500 divide-y divide-gray-200"
         >
             <li class="py-1.5 sm:py-2">
                 <div class="flex items-center justify-between">
@@ -466,7 +466,7 @@
             >
                 <div class="flex items-center justify-between">
                     <div
-                        class="inline-flex items-center font-bold truncate flex-wrap w-auto"
+                        class="inline-flex flex-wrap items-center w-auto font-bold truncate"
                     >
                         {{ item.name }}
                     </div>
@@ -475,7 +475,7 @@
                     </div>
                     <div class="inline-flex items-center">
                         {{ parseFloat(item.subTotal).toLocaleString() }}
-                        <span class="text-indigo-500 mr-1"> د.ع </span>
+                        <span class="mr-1 text-indigo-500"> د.ع </span>
                     </div>
                 </div>
             </li>
@@ -495,7 +495,7 @@
                                 .toLocaleString()
                         }}
 
-                        <span class="text-indigo-500 mr-1"> د.ع </span>
+                        <span class="mr-1 text-indigo-500"> د.ع </span>
                     </div>
                 </div>
             </li>
@@ -506,7 +506,7 @@
                     </div>
                     <div class="inline-flex items-center">
                         {{ invoice.discount?.toLocaleString() }}
-                        <span class="text-indigo-500 mr-1"> د.ع </span>
+                        <span class="mr-1 text-indigo-500"> د.ع </span>
                     </div>
                 </div>
             </li>
@@ -517,7 +517,7 @@
                     </div>
                     <div class="inline-flex items-center">
                         {{ invoice.totalFoodAmount?.toLocaleString() }}
-                        <span class="text-indigo-500 mr-1"> د.ع </span>
+                        <span class="mr-1 text-indigo-500"> د.ع </span>
                     </div>
                 </div>
             </li>
@@ -525,13 +525,11 @@
     </div> -->
 </template>
 <script setup>
-const appUrl = import.meta.env.VITE_APP_URL;
-import usePos from "@/composables/pos";
-import InputSearch from "@/components/inputSearch.vue";
+import InputSearch from "@/Components/inputSearch.vue";
 
 import { useFoodCartStore } from "@/stores/foodCartStore";
 const cartStore = useFoodCartStore();
-import SmallCard from "@/components/smallCard.vue";
+import SmallCard from "@/Components/smallCard.vue";
 import { computed, onBeforeUnmount, reactive, ref, watch } from "vue";
 const {
 	getCategories,

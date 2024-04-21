@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "lodash": "^4.17.21",
-        "vuedraggable": "^2.24.3"
+        "pinia": "^2.1.7",
+        "vuedraggable": "^4.1.0"
     }
 }

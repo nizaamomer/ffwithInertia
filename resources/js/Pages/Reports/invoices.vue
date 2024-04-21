@@ -1,19 +1,19 @@
 <template>
      <Nav/>
-    <div class="bg-slate-900 overflow-auto w-full">
+    <div class="w-full overflow-auto bg-slate-900">
         <div
             class="bg-slate-700 w-full h-[87vh] 2xl:h-[90vh] md:w-11/12 mx-auto text-gray-300 rounded overflow-hidden text-center text-base p-2 m-3"
         >
             <div
-                class="grid md:grid-cols-4 grid-cols-2 flex-row text-center flex-wrap justify-between align-middle lg:gap-x-8 gap-y-2 gap-x-2 mb-2"
+                class="grid flex-row flex-wrap justify-between grid-cols-2 mb-2 text-center align-middle md:grid-cols-4 lg:gap-x-8 gap-y-2 gap-x-2"
             >
                 <div
-                    class="bg-teal-500 text-lg p-2 sm:px-2 rounded-lg text-gray-800 font-semibold shadow-md flex justify-around items-center"
+                    class="flex items-center justify-around p-2 text-lg font-semibold text-gray-800 bg-teal-500 rounded-lg shadow-md sm:px-2"
                 >
                     <i
-                        class="fa-solid fa-boxes-stacked sm:text-2xl text-xl bg-teal-400 text-gray-200 rounded-md px-4 py-3"
+                        class="px-4 py-3 text-xl text-gray-200 bg-teal-400 rounded-md fa-solid fa-boxes-stacked sm:text-2xl"
                     ></i>
-                    <div class="text-md sm:text-lg text-right text-gray-200">
+                    <div class="text-right text-gray-200 text-md sm:text-lg">
                         <p>
                             {{ invoices.length }}
                         </p>
@@ -21,12 +21,12 @@
                     </div>
                 </div>
                 <div
-                    class="bg-pink-600 text-lg p-2 sm:px-2 rounded-lg text-gray-800 font-semibold shadow-md flex justify-around items-center"
+                    class="flex items-center justify-around p-2 text-lg font-semibold text-gray-800 bg-pink-600 rounded-lg shadow-md sm:px-2"
                 >
                     <i
-                        class="fa-solid fa-cart-shopping sm:text-2xl text-xl bg-pink-400 text-gray-300 rounded-md px-4 py-3"
+                        class="px-4 py-3 text-xl text-gray-300 bg-pink-400 rounded-md fa-solid fa-cart-shopping sm:text-2xl"
                     ></i>
-                    <div class="text-md sm:text-lg text-right text-gray-300">
+                    <div class="text-right text-gray-300 text-md sm:text-lg">
                         <p>
                             {{ totalSumInvoice?.toLocaleString() }}
                             <span class="text-gray-800"> د.ع </span>
@@ -35,26 +35,26 @@
                     </div>
                 </div>
                 <div
-                    class="bg-purple-700 text-lg p-2 sm:px-2 rounded-lg text-gray-800 font-semibold shadow-md flex justify-around items-center"
+                    class="flex items-center justify-around p-2 text-lg font-semibold text-gray-800 bg-purple-700 rounded-lg shadow-md sm:px-2"
                 >
                     <i
-                        class="fa-solid fa-cart-plus sm:text-2xl text-xl bg-purple-500 text-gray-300 rounded-md px-4 py-3"
+                        class="px-4 py-3 text-xl text-gray-300 bg-purple-500 rounded-md fa-solid fa-cart-plus sm:text-2xl"
                     ></i>
-                    <div class="text-md sm:text-lg text-right text-gray-300">
+                    <div class="text-right text-gray-300 text-md sm:text-lg">
                         <p>
                             {{ totalitems?.toLocaleString() }}
                             <span class="text-gray-800"> دانــە </span>
                         </p>
-                        <p class="sm:text-base text-sm">ژمــارەی خـواردنەکان</p>
+                        <p class="text-sm sm:text-base">ژمــارەی خـواردنەکان</p>
                     </div>
                 </div>
                 <div
-                    class="bg-red-500 text-lg p-2 rounded-lg text-gray-800 font-semibold shadow-md flex justify-around items-center"
+                    class="flex items-center justify-around p-2 text-lg font-semibold text-gray-800 bg-red-500 rounded-lg shadow-md"
                 >
                     <i
-                        class="fa-solid fa-shop sm:text-2xl text-xl bg-red-400 text-gray-300 rounded-md px-4 py-3"
+                        class="px-4 py-3 text-xl text-gray-300 bg-red-400 rounded-md fa-solid fa-shop sm:text-2xl"
                     ></i>
-                    <div class="text-md sm:text-lg text-right text-gray-300">
+                    <div class="text-right text-gray-300 text-md sm:text-lg">
                         <p>
                             {{ totalSumDiscount?.toLocaleString() }}
                             <span class="text-gray-800"> د.ع </span>
@@ -64,17 +64,17 @@
                 </div>
             </div>
             <div
-                class="flex items-center relative flex-wrap gap-y-2 justify-between min-w-full pb-3"
+                class="relative flex flex-wrap items-center justify-between min-w-full pb-3 gap-y-2"
             >
                 <div
-                    class="flex w-fit space-x-2 gap-y-2 flex-wrap space-x-reverse items-center relative justify-between"
+                    class="relative flex flex-wrap items-center justify-between space-x-2 space-x-reverse w-fit gap-y-2"
                 >
                     <select
                         id="user_id"
                         name="user_id"
                         v-model="user_id"
                         @change="changeOption"
-                        class="bg-slate-800 w-2/6 md:w-auto focus:bg-gray-900 border border-none text-gray-300 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 block py-2"
+                        class="block w-2/6 py-2 text-sm text-gray-300 border border-none rounded-lg bg-slate-800 md:w-auto focus:bg-gray-900 focus:ring-rose-500 focus:border-rose-500"
                     >
                         <option value="">دیـاریکردنی کـاشێر</option>
                         <option
@@ -90,7 +90,7 @@
                         name="status"
                         v-model="status"
                         @change="changeOption"
-                        class="bg-slate-800 w-2/6 md:w-auto focus:bg-gray-900 border border-none text-gray-300 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 block py-2"
+                        class="block w-2/6 py-2 text-sm text-gray-300 border border-none rounded-lg bg-slate-800 md:w-auto focus:bg-gray-900 focus:ring-rose-500 focus:border-rose-500"
                     >
                         <option value="">شێوازی پــارەدان</option>
                         <option value="cash">حــازر</option>
@@ -119,41 +119,41 @@
                     </button>
                     <div
                         v-if="showDate"
-                        class="absolute top-10 left-0 z-10 inline-block w-34 text-sm text-gray-500 duration-300 bg-gray-900 rounded-lg shadow-sm space-y-2 py-2"
+                        class="absolute left-0 z-10 inline-block py-2 space-y-2 text-sm text-gray-500 duration-300 bg-gray-900 rounded-lg shadow-sm top-10 w-34"
                     >
                         <select
                             name="date_range"
                             size="5"
                             v-model="dateRange"
                             @change="changeOption"
-                            class="bg-gray-900 w-full text-center focus:outline-none outline-none border-none space-y-2 h-40"
+                            class="w-full h-40 space-y-2 text-center bg-gray-900 border-none outline-none focus:outline-none"
                         >
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="today"
                             >
                                 ئــەمڕۆ
                             </option>
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="this_week"
                             >
                                 ئـەم هــەفتەیە
                             </option>
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="last_week"
                             >
                                 کــۆتا هــەفتە
                             </option>
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="this_month"
                             >
                                 ئـەم مــانگە
                             </option>
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="last_month"
                             >
                                 کــۆتا مــانگ
@@ -162,30 +162,30 @@
                         <button
                             id="showrange"
                             type="button"
-                            class="checked:bg-indigo-500 my-3 text-base checked:text-white font-semibold inline-block rounded"
+                            class="inline-block my-3 text-base font-semibold rounded checked:bg-indigo-500 checked:text-white"
                             @click="isFormVisible = !isFormVisible"
                         >
                             مەودای تایبەت
                         </button>
                         <!-- Additional inputs for custom range if selected -->
-                        <div v-if="isFormVisible" class="text-center space-y-2">
+                        <div v-if="isFormVisible" class="space-y-2 text-center">
                             <input
                                 type="date"
                                 v-model="customStartDate"
                                 @change="changeOption"
-                                class="rounded bg-gray-800 mx-auto block text-center focus:outline-none outline-none border-0 space-y-2"
+                                class="block mx-auto space-y-2 text-center bg-gray-800 border-0 rounded outline-none focus:outline-none"
                             />
                             <input
                                 type="date"
                                 v-model="customEndDate"
                                 @change="changeOption"
-                                class="rounded bg-gray-800 mx-auto block text-center focus:outline-none outline-none border-0 space-y-2"
+                                class="block mx-auto space-y-2 text-center bg-gray-800 border-0 rounded outline-none focus:outline-none"
                             />
                         </div>
 
                         <div>
                             <button
-                                class="bg-rose-600 text-gray-200 text-center px-4 py-1 rounded"
+                                class="px-4 py-1 text-center text-gray-200 rounded bg-rose-600"
                                 type="submit"
                                 @click.prevent="reset"
                             >
@@ -196,12 +196,12 @@
                     </div>
                 </div>
                 <div
-                    class="flex w-fit space-x-2 space-x-reverse items-center relative justify-between"
+                    class="relative flex items-center justify-between space-x-2 space-x-reverse w-fit"
                 >
                     <button
                         @click.prevent="reset"
                         type="button"
-                        class="py-2 px-4 text-sm bg-rose-800 hover:bg-rose-900 cursor-pointer font-medium whitespace-nowrap rtl:ml-2 text-white focus:outline-none rounded-lg"
+                        class="px-4 py-2 text-sm font-medium text-white rounded-lg cursor-pointer bg-rose-800 hover:bg-rose-900 whitespace-nowrap rtl:ml-2 focus:outline-none"
                     >
                         reset
                     </button>
@@ -221,15 +221,15 @@
                     <div v-if="openPdf"
                         class="overflow-y-auto overflow-x-hidden fixed inset-0 z-[60] flex justify-center items-center"
                     >
-                        <div class="relative p-4 w-full max-w-xl max-h-full">
+                        <div class="relative w-full max-w-xl max-h-full p-4">
                             <!-- Modal content -->
                             <div>
                                 <div
-                                    class="relative rounded-lg shadow bg-gray-800"
+                                    class="relative bg-gray-800 rounded-lg shadow"
                                 >
                                     <!-- Modal header -->
                                     <div
-                                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-600"
+                                        class="flex items-center justify-between p-4 border-b border-gray-600 rounded-t md:p-5"
                                     >
                                         <h3
                                             class="text-2xl font-semibold text-white"
@@ -238,7 +238,7 @@
                                         </h3>
                                         <button
                                             type="button"
-                                            class="text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center hover:bg-gray-600 hover:text-white"
+                                            class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg ms-auto hover:bg-gray-600 hover:text-white"
                                             @click="openPdf = false"
                                         >
                                             <svg
@@ -262,7 +262,7 @@
                                         </button>
                                     </div>
                                     <!-- Modal body -->
-                                    <div class="p-4 md:p-5 space-y-4">
+                                    <div class="p-4 space-y-4 md:p-5">
                                         <p
                                             class="text-base leading-relaxed text-gray-300"
                                         >
@@ -284,10 +284,10 @@
                                             وردەکاریەکان
                                         </h3>
                                         <ul
-                                            class="items-center w-full text-sm font-medium border rounded-lg sm:flex bg-gray-700 border-gray-600 text-white"
+                                            class="items-center w-full text-sm font-medium text-white bg-gray-700 border border-gray-600 rounded-lg sm:flex"
                                         >
                                             <li
-                                                class="w-full border-b sm:border-b-0 sm:border-r border-gray-600"
+                                                class="w-full border-b border-gray-600 sm:border-b-0 sm:border-r"
                                             >
                                                 <div
                                                     class="flex items-center ps-3"
@@ -298,11 +298,11 @@
                                                         v-model="isShowItem"
                                                         value="1"
                                                         name="withItems"
-                                                        class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 border-gray-500"
+                                                        class="w-4 h-4 text-indigo-600 bg-gray-600 border-gray-500 rounded focus:ring-indigo-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2"
                                                     />
                                                     <label
                                                         for="vue-checkbox-list"
-                                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-300"
+                                                        class="w-full py-3 text-sm font-medium text-gray-300 ms-2"
                                                     >
                                                         پیشاندانی مادەکان لەگەڵ
                                                         وەسڵەکادا</label
@@ -313,7 +313,7 @@
                                     </div>
                                     <!-- Modal footer -->
                                     <div
-                                        class="flex items-center p-4 md:p-5 border-t rounded-b border-gray-600"
+                                        class="flex items-center p-4 border-t border-gray-600 rounded-b md:p-5"
                                     >
                                         <button
                                             @click.prevent="
@@ -341,14 +341,14 @@
             </div>
 
             <div
-                class="bg-slate-700 text-gray-300 rounded text-center text-base gap-2 overflow-auto"
+                class="gap-2 overflow-auto text-base text-center text-gray-300 rounded bg-slate-700"
             >
                 <div
                     class="relative h-[62vh] 2xl:h-[68vh] overflow-auto shadow-md sm:rounded-lg"
                 >
                     <table class="w-full text-sm text-center text-gray-400">
                         <thead
-                            class="text-sm text-gray-500 sticky top-0 uppercase bg-gray-900"
+                            class="sticky top-0 text-sm text-gray-500 uppercase bg-gray-900"
                         >
                             <tr class="truncate">
                                 <th scope="col" class="px-2.5 py-3">
@@ -377,17 +377,17 @@
                             <tr
                                 v-for="invoice in invoices"
                                 :key="invoice.id"
-                                class="bg-slate-900 border-b border-indigo-500 hover:border-y-2 hover:border-rose-800 w-full"
+                                class="w-full border-b border-indigo-500 bg-slate-900 hover:border-y-2 hover:border-rose-800"
                             >
                                 <td
                                     scope="row"
-                                    class="px-3 py-2 truncate font-medium whitespace-nowrap"
+                                    class="px-3 py-2 font-medium truncate whitespace-nowrap"
                                 >
                                     {{ invoice.id }}
                                 </td>
                                 <td
                                     scope="row"
-                                    class="px-3 py-2 truncate font-medium whitespace-nowrap"
+                                    class="px-3 py-2 font-medium truncate whitespace-nowrap"
                                 >
                                     {{ invoice.addedBy }}
                                 </td>
@@ -434,14 +434,14 @@
                                 </td>
                                 <td class="px-3 py-2 truncate">
                                     <div
-                                        class="flex justify-around items-center space-x-2 space-x-reverse"
+                                        class="flex items-center justify-around space-x-2 space-x-reverse"
                                     >
                                         <router-link
                                             :to="{
                                                 name: 'invoice.show',
                                                 params: { id: invoice.id },
                                             }"
-                                            class="font-medium  text-indigo-500 hover:underline"
+                                            class="font-medium text-indigo-500 hover:underline"
                                             >پیشاندان</router-link
                                         >
                                     </div>
@@ -465,12 +465,11 @@
     </div>
 </template>
 <script setup>
-import useInvoices from "@/composables/reports/invoices";
 import { onMounted, ref, watch } from "vue";
 import Nav from "./nav.vue"
 
-import { initFlowbite } from "flowbite";
-import InputSearch from "@/components/inputSearch.vue";
+
+import InputSearch from "@/Components/inputSearch.vue";
 
 const {
     isFormVisible,

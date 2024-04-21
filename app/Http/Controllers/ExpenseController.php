@@ -14,11 +14,13 @@ class ExpenseController extends Controller
      */
     public function index(Request $request)
     {
-        $expenses = ExpenseResource::collection(
-            Expense::OfSearch($request->search)
-                ->latest()->paginate(10)
+        return inertia(
+            'Expenses/Index',
+            ['expenses' => ExpenseResource::collection(
+                Expense::OfSearch($request->search)
+                    ->latest()->paginate(10)
+            )]
         );
-        return inertia('Expenses/Index', ['expenses' => $expenses]);
     }
 
     /**
@@ -76,6 +78,6 @@ class ExpenseController extends Controller
     {
         $expense->delete();
         return redirect()->route('expenses.index')
-        ->with('message', 'خەرجی سڕایەوە بە سەرکەوتووی!');
+            ->with('message', 'خەرجی سڕایەوە بە سەرکەوتووی!');
     }
 }

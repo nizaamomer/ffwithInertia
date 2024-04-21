@@ -1,9 +1,9 @@
 <template>
-    <div class="md:w-11/12 w-full mx-auto">
+    <div class="w-full mx-auto md:w-11/12">
         <Breadcrumb :items="breadcrumbs" />
-        <div class="sm:flex block items-center justify-between mb-1">
+        <div class="items-center justify-between block mb-1 sm:flex">
             <div
-                class="flex items-center space-x-3 rtl:space-x-reverse my-5 sm:my-0 justify-center"
+                class="flex items-center justify-center my-5 space-x-3 rtl:space-x-reverse sm:my-0"
             >
                 <InputSearch @searchFunc="searchFunc" v-model.trim="search" />
                 <CreateRouteIcon href="offer.create" label="زیادکردنی ئۆفەر" />
@@ -26,7 +26,7 @@
                     />
                 </svg>
                 <span class="sr-only">Info</span>
-                <div class="ms-3 text-sm font-medium">
+                <div class="text-sm font-medium ms-3">
                     {{ message }}
                 </div>
             </div>
@@ -35,7 +35,7 @@
             class="bg-slate-700 w-full h-[84vh] mx-auto text-gray-300 rounded overflow-hidden text-center text-base p-2 m-3"
         >
             <div
-                class="bg-slate-700 sm:pb-3 text-gray-300 rounded text-center text-base gap-2 overflow-auto"
+                class="gap-2 overflow-auto text-base text-center text-gray-300 rounded bg-slate-700 sm:pb-3"
             >
                 <div
                     class="relative h-[83vh] overflow-x-auto shadow-md sm:rounded-lg"
@@ -44,7 +44,7 @@
                         class="w-full text-sm text-center text-gray-500 dark:text-gray-400"
                     >
                         <thead
-                            class="text-sm text-gray-500 sticky top-0 uppercase bg-gray-900"
+                            class="sticky top-0 text-sm text-gray-500 uppercase bg-gray-900"
                         >
                             <tr class="truncate">
                                 <th scope="col" class="px-3 py-3">
@@ -75,7 +75,7 @@
                         >
                             <template #item="{ element }">
                                 <tr
-                                    class="bg-slate-900 border-b border-indigo-500 hover:border-y-2 hover:border-rose-800 w-full"
+                                    class="w-full border-b border-indigo-500 bg-slate-900 hover:border-y-2 hover:border-rose-800"
                                 >
                                     <td
                                         scope="row"
@@ -83,7 +83,7 @@
                                     >
                                         <button class="drag-handle">
                                             <svg
-                                                class="text-gray-400 hover:text-indigo-600 mx-auto"
+                                                class="mx-auto text-gray-400 hover:text-indigo-600"
                                                 fill="currentColor"
                                                 width="32"
                                                 height="32"
@@ -113,7 +113,7 @@
                                     </td>
                                     <td
                                         scope="row"
-                                        class="px-3 py-2 truncate font-medium whitespace-nowrap"
+                                        class="px-3 py-2 font-medium truncate whitespace-nowrap"
                                     >
                                         {{ element.name }}
                                     </td>
@@ -141,7 +141,7 @@
                                     </td>
                                     <td class="px-3 py-2 truncate">
                                         <div
-                                            class="flex justify-around items-center space-x-2 space-x-reverse"
+                                            class="flex items-center justify-around space-x-2 space-x-reverse"
                                         >
                                             <router-link
                                                 :to="{
@@ -200,7 +200,7 @@
                                                     viewBox="0 0 24 24"
                                                     stroke-width="1.5"
                                                     stroke="currentColor"
-                                                    class="sm:w-5 sm:h-5 w-4 h-4 text-red-500 cursor-pointer hover:text-red-600"
+                                                    class="w-4 h-4 text-red-500 cursor-pointer sm:w-5 sm:h-5 hover:text-red-600"
                                                 >
                                                     <path
                                                         stroke-linecap="round"
@@ -220,19 +220,19 @@
                                         class="overflow-y-auto overflow-x-hidden fixed inset-0 z-[60] flex justify-center items-center"
                                     >
                                         <div
-                                            class="relative p-4 w-full max-w-md max-h-full"
+                                            class="relative w-full max-w-md max-h-full p-4"
                                         >
                                             <!-- Modal content -->
                                             {{ element.id }}
                                             <div
-                                                class="relative rounded-lg shadow bg-gray-800 p-5 text-center items-center"
+                                                class="relative items-center p-5 text-center bg-gray-800 rounded-lg shadow"
                                             >
                                                 <svg
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke-width="1.5"
                                                     stroke="currentColor"
-                                                    class="sm:w-20 sm:h-20 w-14 h-14 text-red-500 mx-auto hover:text-red-600"
+                                                    class="mx-auto text-red-500 sm:w-20 sm:h-20 w-14 h-14 hover:text-red-600"
                                                 >
                                                     <path
                                                         stroke-linecap="round"
@@ -241,7 +241,7 @@
                                                     />
                                                 </svg>
                                                 <h1
-                                                    class="text-indigo-500 text-lg py-2"
+                                                    class="py-2 text-lg text-indigo-500"
                                                 >
                                                     سڕیــنەوە!
                                                 </h1>
@@ -250,7 +250,7 @@
                                                     ئۆفەرە ؟
                                                 </p>
                                                 <div
-                                                    class="flex items-center justify-center space-x-5 rtl:space-x-reverse py-5"
+                                                    class="flex items-center justify-center py-5 space-x-5 rtl:space-x-reverse"
                                                 >
                                                     <button
                                                         @click="
@@ -294,12 +294,11 @@
 </template>
 
 <script setup>
-import useOffers from "@/composables/offers";
 import draggable from "vuedraggable";
-import Breadcrumb from "@/components/breadcrumb.vue";
+import Breadcrumb from "@/Components/breadcrumb.vue";
 const breadcrumbs = [{ title: "ئۆفەرەکان", link: "/offers" }];
-import InputSearch from "@/components/inputSearch.vue";
-import CreateRouteIcon from "@/components/createRouteIcon.vue";
+import InputSearch from "@/Components/inputSearch.vue";
+import CreateRouteIcon from "@/Components/createRouteIcon.vue";
 import { onBeforeMount, ref } from "vue";
 const showDeleteModal = ref({});
 const toggleShowDelete = (itemId) => {

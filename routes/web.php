@@ -32,14 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //----------------------
-
     Route::post('profile/update/', [UserController::class, 'profileUpdate']);
-    Route::apiResource('users', UserController::class);
-    Route::apiResource('categories', CategoryController::class);
-    Route::apiResource('foods', FoodController::class);
-    Route::apiResource('expenses', ExpenseController::class);
-    Route::apiResource('invoices', InvoiceController::class);
-    Route::apiResource('offers', OfferController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('foods', FoodController::class);
+    Route::resource('expenses', ExpenseController::class);
+    Route::resource('invoices', InvoiceController::class);
+    Route::resource('offers', OfferController::class);
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::put('category/update-order', [CategoryController::class, 'updateCategoryOrder']);
     Route::controller(OfferController::class)->group(function () {
@@ -56,5 +55,4 @@ Route::middleware('auth')->group(function () {
     Route::post('reports/expenses/download', [ReportController::class, 'downloadExpenses']);
     Route::get('getCategories', [FoodController::class, 'getCategories']);
 });
-
 require __DIR__ . '/auth.php';

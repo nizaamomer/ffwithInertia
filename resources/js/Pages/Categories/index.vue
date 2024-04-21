@@ -6,7 +6,10 @@
                 class="flex items-center justify-center my-5 space-x-3 rtl:space-x-reverse sm:my-0"
             >
                 <InputSearch @searchFunc="searchFunc" v-model.trim="search" />
-                <CreateRouteIcon routeName="category/create" label="زیادکردنی پۆل" />
+                <CreateRouteIcon
+                    routeName="category/create"
+                    label="زیادکردنی پۆل"
+                />
             </div>
             <div
                 v-if="flash.message"
@@ -55,11 +58,26 @@
                             <th scope="col" class="px-3 py-3">دەستکاری کردن</th>
                         </tr>
                     </thead>
-                    <draggable
-                        v-model="props.categories"
-                        tag="tbody"
+                    {{
+                        categories
+                    }}
+                    <draggable v-model="categories">
+      <div v-for="category in categories" :key="category.id">
+        <!-- Display category information here -->
+        <p>{{ category.name }}</p>
+        <img :src="category.image" alt="Category Image" />
+        <!-- Add more fields as needed -->
+      </div>
+    </draggable>
+
+                    <!--                     
+                        :list="categories"
+                        @update:list="categories = $event" -->
+                    <!-- <draggable
+                    tag="transition-group"
                         item-key="id"
                         @end="onDragEnd"
+                        v-model="cate"
                     >
                         <template #item="{ element }">
                             <tr
@@ -125,11 +143,10 @@
                                     {{ element.addedBy }}
                                 </td>
                                 <td class="px-3 py-1">
-                                    <router-link
-                                        :to="{
-                                            name: 'category.edit',
-                                            params: { id: element.id },
-                                        }"
+                                    <Link
+                                        :href="
+                                            route('categories.edit', element.id)
+                                        "
                                         class="flex items-center justify-center w-full h-8 text-indigo-400 rounded-lg bg-indigo-950"
                                     >
                                         <svg
@@ -144,44 +161,42 @@
                                             ></path>
                                         </svg>
                                         <p class="pr-1.5">دەستکاری</p>
-                                    </router-link>
+                                    </Link>
                                 </td>
                             </tr>
                         </template>
-                    </draggable>
+                    </draggable> -->
                 </table>
-                <!-- <rawDisplayer :value="categories" title="Categories" /> -->
+                <rawDisplayer :value="cate" title="Categories" />
             </div>
         </div>
     </div>
 </template>
-
 <script setup>
-// import draggable from "vuedraggable";
-// import Breadcrumb from "@/Components/breadcrumb.vue";
-// import InputSearch from "@/Components/inputSearch.vue";
-// import CreateRouteIcon from "@/Components/createRouteIcon.vue";
-// import useSearch from "@/Composables/searchWatch";
-
-// import { onMounted } from "vue";
-// const props = defineProps(["categories", "flash", "search"]);
-// import useClearAfterTimeout from "@/Composables/clearFlash";
-// import { Link, router } from "@inertiajs/vue3";
-
-// const search = ref(props.search);
-// const breadcrumbs = [{ title: "پۆلــەکان", link: "/categories" }];
-
-// onMounted(async () => {
-//     await getCategories();
-// });
-// const onDragEnd = (evt) => {
-//     const newOrder = categories.value.map((category) => category.id);
-//     router.put("category/update-order", {
-//         order: newOrder,
-//     });
-// };
-
-// const { clearAfterTimeout } = useClearAfterTimeout(props.flash);
-// clearAfterTimeout();
-// useSearch(search, "categories");
+import draggable from "vuedraggable";
+import Breadcrumb from "@/Components/breadcrumb.vue";
+import InputSearch from "@/Components/inputSearch.vue";
+import CreateRouteIcon from "@/Components/createRouteIcon.vue";
+import useSearch from "@/Composables/searchWatch";
+import { onMounted, ref } from "vue";
+const cate = ref([]);
+const list = ref([
+    { id: 1, text: "Item 1" },
+    { id: 2, text: "Item 2" },
+    { id: 3, text: "Item 3" },
+]);
+const props = defineProps(["categories", "flash", "search"]);
+import useClearAfterTimeout from "@/Composables/clearFlash";
+import { Link, router } from "@inertiajs/vue3";
+const search = ref(props.search);
+const breadcrumbs = [{ title: "پۆلــەکان", link: "/categories" }];
+const onDragEnd = (evt) => {
+    const newOrder = props.categories.value.map((category) => category.id);
+    router.put("category/update-order", {
+        order: newOrder,
+    });
+};
+const { clearAfterTimeout } = useClearAfterTimeout(props.flash);
+clearAfterTimeout();
+useSearch(search, "categories");
 </script>

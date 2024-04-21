@@ -2,22 +2,22 @@
     <div class="mx-5">
         <Breadcrumb :items="breadcrumbs" />
         <!-- <div v-if="errors">{{ errors }}</div> -->
-        <div class="sm:flex block items-center justify-between">
+        <div class="items-center justify-between block sm:flex">
             <div
-                class="flex items-center space-x-3 rtl:space-x-reverse my-5 sm:my-0 justify-center"
+                class="flex items-center justify-center my-5 space-x-3 rtl:space-x-reverse sm:my-0"
             >
                 <InputSearch @searchFunc="searchFunc" v-model.trim="search" />
 
                 <div class="flex items-center justify-between">
                     <button
                         @click="showCreateModal = !showCreateModal"
-                        class="text-sm bg-gray-800 px-4 hidden sm:block py-2 rounded-md font-semibold text-rose-500 hover:bg-rose-900 hover:text-white"
+                        class="hidden px-4 py-2 text-sm font-semibold bg-gray-800 rounded-md sm:block text-rose-500 hover:bg-rose-900 hover:text-white"
                     >
                         زیادکردنی خەرجی
                     </button>
                     <button
                         @click="showCreateModal != showCreateModal"
-                        class="text-sm bg-gray-800 sm:hidden px-4 py-2 rounded-md font-medium text-rose-500 hover:bg-rose-900 hover:text-white"
+                        class="px-4 py-2 text-sm font-medium bg-gray-800 rounded-md sm:hidden text-rose-500 hover:bg-rose-900 hover:text-white"
                     >
                         <svg
                             class="w-5 h-5"
@@ -42,23 +42,23 @@
                         aria-hidden="true"
                         class="overflow-y-auto overflow-x-hidden fixed inset-0 z-[60] flex justify-center items-center"
                     >
-                        <div class="relative p-4 w-full max-w-md max-h-full">
+                        <div class="relative w-full max-w-md max-h-full p-4">
                             <!-- Modal content -->
                             <div
                                 class="relative bg-indigo-800 rounded-lg shadow"
                             >
                                 <!-- Modal header -->
                                 <div
-                                    class="flex items-start justify-between p-3 border-b rounded-t border-gray-400"
+                                    class="flex items-start justify-between p-3 border-b border-gray-400 rounded-t"
                                 >
                                     <h3
-                                        class="text-xl font-semibold text-gray-900 pt-1"
+                                        class="pt-1 text-xl font-semibold text-gray-900"
                                     >
                                         زیــادکردنی خەرجی
                                     </h3>
                                     <button
                                         type="button"
-                                        class="text-gray-400 bg-transparent hover:bg-rose-500 hover:text-gray-200 rounded-lg text-sm w-9 h-9 ml-3 inline-flex justify-center items-center"
+                                        class="inline-flex items-center justify-center ml-3 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-rose-500 hover:text-gray-200 w-9 h-9"
                                         @click="showCreateModal = false"
                                     >
                                         <svg
@@ -127,7 +127,7 @@
                                     </div>
                                     <!-- Modal footer -->
                                     <div
-                                        class="flex items-center p-6 space-x-2 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600"
+                                        class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b rtl:space-x-reverse dark:border-gray-600"
                                     >
                                         <button
                                             type="submit"
@@ -153,17 +153,17 @@
                         v-for="(errorMessages, KeyName) in errors"
                         :key="KeyName"
                         dir="ltr"
-                        class="absolute right-20 bottom-2 z-50 w-1/4"
+                        class="absolute z-50 w-1/4 right-20 bottom-2"
                     >
                         <div
                             v-for="errorMessage in errorMessages"
                             :key="errorMessage"
                             :id="`toast-danger`"
-                            class="flex justify-between items-center shadow-xl w-full p-4 mb-4 text-gray-500 bg-gray-800 rounded-lg"
+                            class="flex items-center justify-between w-full p-4 mb-4 text-gray-500 bg-gray-800 rounded-lg shadow-xl"
                             role="alert"
                         >
                             <div
-                                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-red-800 text-red-200"
+                                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-200 bg-red-800 rounded-lg"
                             >
                                 <svg
                                     class="w-5 h-5"
@@ -178,7 +178,7 @@
                                 </svg>
                                 <span class="sr-only">Error icon</span>
                             </div>
-                            <div class="ml-3 rtl:mr-3 text-sm font-normal">
+                            <div class="ml-3 text-sm font-normal rtl:mr-3">
                                 {{ errorMessage }}
                             </div>
                             <button
@@ -228,7 +228,7 @@
                         />
                     </svg>
                     <span class="sr-only">Info</span>
-                    <div class="ms-3 text-sm font-medium">
+                    <div class="text-sm font-medium ms-3">
                         {{ message }}
                     </div>
                 </div>
@@ -237,20 +237,20 @@
             class="bg-slate-700 h-[82vh] w-full mx-auto text-gray-300 rounded overflow-hidden text-center text-base p-1 m-3"
         >
             <div
-                class="bg-slate-700 text-gray-300 pb-10 sm:pb-3 rounded text-center text-base gap-2 overflow-auto"
+                class="gap-2 pb-10 overflow-auto text-base text-center text-gray-300 rounded bg-slate-700 sm:pb-3"
             >
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <div
                         class="relative overflow-y-scroll h-[81vh] scroll-smooth rounded-md"
                     >
                         <table
-                            class="w-full text-sm text-left rtl:text-right text-gray-500"
+                            class="w-full text-sm text-left text-gray-500 rtl:text-right"
                         >
                             <thead
-                                class="text-sm text-gray-500 sticky top-0 uppercase bg-gray-900"
+                                class="sticky top-0 text-sm text-gray-500 uppercase bg-gray-900"
                             >
                                 <tr
-                                    class="divide-x divide-x-reverse truncate divide-indigo-400"
+                                    class="truncate divide-x divide-x-reverse divide-indigo-400"
                                 >
                                     <th scope="col" class="px-6 py-3">
                                         جـــۆری خــەرجــی
@@ -278,22 +278,22 @@
                                 <tr
                                     v-for="item in expenses"
                                     :key="item.id"
-                                    class="bg-slate-900 border-b border-indigo-500 hover:border-y-2 hover:border-rose-800 w-full"
+                                    class="w-full border-b border-indigo-500 bg-slate-900 hover:border-y-2 hover:border-rose-800"
                                 >
                                     <th
                                         scope="row"
-                                        class="px-6 pr-0 text-center rtl:pr-3 py-2 pt-3 flex items-center space-x-3 space-x-reverse"
+                                        class="flex items-center px-6 py-2 pt-3 pr-0 space-x-3 space-x-reverse text-center rtl:pr-3"
                                     >
                                         {{ item.name }}
                                     </th>
-                                    <td class="px-6 py-4 truncate text-center">
+                                    <td class="px-6 py-4 text-center truncate">
                                         {{ item.amount.toLocaleString() }}
                                         <span class="text-indigo-500">
                                             د.ع
                                         </span>
                                     </td>
 
-                                    <td class="px-6 py-4 truncate text-center">
+                                    <td class="px-6 py-4 text-center truncate">
                                         {{ item.date }}
                                     </td>
                                     <td class="px-6 py-4">
@@ -303,11 +303,11 @@
                                                 : "Empty"
                                         }}
                                     </td>
-                                    <td class="px-6 py-4 truncate text-center">
+                                    <td class="px-6 py-4 text-center truncate">
                                         {{ item.addedBy }}
                                     </td>
                                     <td
-                                        class="px-6 py-4 text-center flex justify-evenly space-x-4 rtl:space-x-reverse align-middle"
+                                        class="flex px-6 py-4 space-x-4 text-center align-middle justify-evenly rtl:space-x-reverse"
                                     >
                                         <button
                                             @click="
@@ -320,7 +320,7 @@
                                                 viewBox="0 0 24 24"
                                                 stroke-width="1.5"
                                                 stroke="currentColor"
-                                                class="sm:w-5 sm:h-5 w-4 h-4 text-indigo-500 cursor-pointer hover:text-indigo-600 rtl:ml-3"
+                                                class="w-4 h-4 text-indigo-500 cursor-pointer sm:w-5 sm:h-5 hover:text-indigo-600 rtl:ml-3"
                                             >
                                                 <path
                                                     stroke-linecap="round"
@@ -335,7 +335,7 @@
                                             class="overflow-y-auto overflow-x-hidden fixed inset-0 z-[60] flex justify-center items-center"
                                         >
                                             <div
-                                                class="relative p-4 w-full max-w-md max-h-full"
+                                                class="relative w-full max-w-md max-h-full p-4"
                                             >
                                                 <!-- Modal content -->
                                                 <div
@@ -343,17 +343,17 @@
                                                 >
                                                     <!-- Modal header -->
                                                     <div
-                                                        class="flex items-start justify-between p-4 border-b border-b-gray-400 rounded-t"
+                                                        class="flex items-start justify-between p-4 border-b rounded-t border-b-gray-400"
                                                     >
                                                         <h3
-                                                            class="text-xl font-semibold text-indigo-400 pt-1"
+                                                            class="pt-1 text-xl font-semibold text-indigo-400"
                                                         >
                                                             دەستکاری کردنی
                                                             خــەرجــی
                                                         </h3>
                                                         <button
                                                             type="button"
-                                                            class="text-gray-400 bg-transparent hover:bg-rose-500 hover:text-gray-200 rounded-lg text-sm w-9 h-9 ml-3 inline-flex justify-center items-center"
+                                                            class="inline-flex items-center justify-center ml-3 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-rose-500 hover:text-gray-200 w-9 h-9"
                                                             @click="
                                                                 toggleEditModal(
                                                                     item.id
@@ -444,7 +444,7 @@
                                                         </div>
                                                         <!-- Modal footer -->
                                                         <div
-                                                            class="flex items-center p-6 space-x-2 rtl:space-x-reverse border-t rounded-b border-gray-600"
+                                                            class="flex items-center p-6 space-x-2 border-t border-gray-600 rounded-b rtl:space-x-reverse"
                                                         >
                                                             <button
                                                                 type="submit"
@@ -485,7 +485,7 @@
                                                 viewBox="0 0 24 24"
                                                 stroke-width="1.5"
                                                 stroke="currentColor"
-                                                class="sm:w-5 sm:h-5 w-4 h-4 text-red-500 cursor-pointer hover:text-red-600"
+                                                class="w-4 h-4 text-red-500 cursor-pointer sm:w-5 sm:h-5 hover:text-red-600"
                                             >
                                                 <path
                                                     stroke-linecap="round"
@@ -502,19 +502,19 @@
                                             class="overflow-y-auto overflow-x-hidden fixed inset-0 z-[60] flex justify-center items-center"
                                         >
                                             <div
-                                                class="relative p-4 w-full max-w-md max-h-full"
+                                                class="relative w-full max-w-md max-h-full p-4"
                                             >
                                                 <!-- Modal content -->
                                                 {{ item.id }}
                                                 <div
-                                                    class="relative rounded-lg shadow bg-gray-800 p-5 text-center items-center"
+                                                    class="relative items-center p-5 text-center bg-gray-800 rounded-lg shadow"
                                                 >
                                                     <svg
                                                         fill="none"
                                                         viewBox="0 0 24 24"
                                                         stroke-width="1.5"
                                                         stroke="currentColor"
-                                                        class="sm:w-20 sm:h-20 w-14 h-14 text-red-500 mx-auto hover:text-red-600"
+                                                        class="mx-auto text-red-500 sm:w-20 sm:h-20 w-14 h-14 hover:text-red-600"
                                                     >
                                                         <path
                                                             stroke-linecap="round"
@@ -523,7 +523,7 @@
                                                         />
                                                     </svg>
                                                     <h1
-                                                        class="text-indigo-500 text-lg py-2"
+                                                        class="py-2 text-lg text-indigo-500"
                                                     >
                                                         سڕیــنەوە!
                                                     </h1>
@@ -534,7 +534,7 @@
                                                         ئەم خەرجیە ؟
                                                     </p>
                                                     <div
-                                                        class="flex items-center justify-center space-x-5 rtl:space-x-reverse py-5"
+                                                        class="flex items-center justify-center py-5 space-x-5 rtl:space-x-reverse"
                                                     >
                                                         <button
                                                             @click="
@@ -570,19 +570,19 @@
                                 </tr>
                                 <tr v-if="nextPageUrl" class="bg-slate-900">
                                     <td colspan="100%" class="p-2 text-center">
-                                        <button
+                                        <!-- <button
                                             @click="loadMore"
                                             class="text-gray-200 bg-rose-600 hover:bg-gray-800 hover:text-rose-500 px-8 py-1.5 rounded-lg font-bold"
                                         >
                                             زیــاتــر...
-                                        </button>
+                                        </button> -->
                                     </td>
                                 </tr>
                             </tbody>
 
                             <div
                                 v-else
-                                class="text-gray-400 mx-auto absolute left-0 right-0 text-center mt-24 text-lg"
+                                class="absolute left-0 right-0 mx-auto mt-24 text-lg text-center text-gray-400"
                             >
                                 هیچ خــەرجیــەک بەردەست نییــە
                             </div>
@@ -595,34 +595,29 @@
 </template>
 
 <script setup>
-import useExpenses from "@/composables/expenses";
 import { ref, reactive, onMounted } from "vue";
-import InputSearch from "@/components/inputSearch.vue";
-import Input from "@/components/input.vue";
-import Breadcrumb from "@/components/breadcrumb.vue";
+import InputSearch from "@/Components/inputSearch.vue";
+import Input from "@/Components/input.vue";
+import Breadcrumb from "@/Components/breadcrumb.vue";
 const breadcrumbs = [{ title: "خەرجیەکان", link: "/expenses" }];
 
-const {
-    expenses,
-    expense,
-    error,
-    errors,
-    search,
-    searchFunc,
-    getExpenses,
-    getExpense,
-    storeExpense,
-    updateExpense,
-    destroyExpense,
+    // expenses,
+    // expense,
+    // error,
+    // errors,
+    // search,
+    // searchFunc,
+    // getExpenses,
+    // getExpense,
+    // storeExpense,
+    // updateExpense,
+    // destroyExpense,
 
-    message,
-    nextPageUrl,
-    loadMore,
-} = useExpenses();
-
-onMounted(() => {
-    getExpenses();
-});
+    // message,
+    // nextPageUrl,
+    // loadMore,
+    
+const nextPageUrl = ref(false);
 const showCreateModal = ref(false);
 const showDeleteModal = ref({});
 const toggleShowDelete = (itemId) => {
@@ -646,21 +641,21 @@ const resetForm = () => {
     form.date = "";
 };
 const save = async () => {
-    await storeExpense(form);
-    if (!errors.value) {
-        showCreateModal.value = false;
-        resetForm();
-        getExpenses();
-    }
+    // await storeExpense(form);
+    // if (!errors.value) {
+    //     showCreateModal.value = false;
+    //     resetForm();
+    //     getExpenses();
+    // }
 };
-initFlowbite();
+
 
 const deleteExpense = async (id) => {
-    await destroyExpense(id);
-    await getExpenses();
+    // await destroyExpense(id);
+    // await getExpenses();
 };
 const update = async (id) => {
-    await updateExpense(id);
-    await getExpenses();
+    // await updateExpense(id);
+    // await getExpenses();
 };
 </script>

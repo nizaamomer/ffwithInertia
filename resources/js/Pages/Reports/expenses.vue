@@ -1,14 +1,14 @@
 <template>
     <Nav/>
-    <div class="bg-slate-900 overflow-auto w-full">
+    <div class="w-full overflow-auto bg-slate-900">
         <div
             class="bg-slate-700 w-full md:w-5/6 mx-auto text-gray-300 rounded overflow-hidden text-center text-base p-2 m-2.5"
         >
             <div
-                class="flex flex-wrap gap-y-2 items-center justify-between min-w-full pb-2"
+                class="flex flex-wrap items-center justify-between min-w-full pb-2 gap-y-2"
             >
                 <div
-                    class="relative flex items-center gap-y-2 space-x-1 flex-wrap space-x-reverse justify-between"
+                    class="relative flex flex-wrap items-center justify-between space-x-1 space-x-reverse gap-y-2"
                 >
                     <InputSearch
                         @searchFunc="searchFunc"
@@ -36,41 +36,41 @@
                     </button>
                     <div
                         v-if="showDate"
-                        class="absolute top-10 left-0 z-10 inline-block w-34 text-sm text-gray-500 duration-300 bg-gray-900 rounded-lg shadow-sm space-y-2 py-2"
+                        class="absolute left-0 z-10 inline-block py-2 space-y-2 text-sm text-gray-500 duration-300 bg-gray-900 rounded-lg shadow-sm top-10 w-34"
                     >
                         <select
                             name="date_range"
                             size="5"
                             v-model="dateRange"
                             @change="changeOption"
-                            class="bg-gray-900 w-full text-center focus:outline-none outline-none border-none space-y-2 h-40"
+                            class="w-full h-40 space-y-2 text-center bg-gray-900 border-none outline-none focus:outline-none"
                         >
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="today"
                             >
                                 ئــەمڕۆ
                             </option>
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="this_week"
                             >
                                 ئـەم هــەفتەیە
                             </option>
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="last_week"
                             >
                                 کــۆتا هــەفتە
                             </option>
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="this_month"
                             >
                                 ئـەم مــانگە
                             </option>
                             <option
-                                class="checked:bg-emerald-600 checked:text-gray-800 font-semibold rounded"
+                                class="font-semibold rounded checked:bg-emerald-600 checked:text-gray-800"
                                 value="last_month"
                             >
                                 کــۆتا مــانگ
@@ -79,30 +79,30 @@
                         <button
                             id="showrange"
                             type="button"
-                            class="checked:bg-indigo-500 my-3 text-base checked:text-white font-semibold inline-block rounded"
+                            class="inline-block my-3 text-base font-semibold rounded checked:bg-indigo-500 checked:text-white"
                             @click="isFormVisible = !isFormVisible"
                         >
                             مەودای تایبەت
                         </button>
                         <!-- Additional inputs for custom range if selected -->
-                        <div v-if="isFormVisible" class="text-center space-y-2">
+                        <div v-if="isFormVisible" class="space-y-2 text-center">
                             <input
                                 type="date"
                                 v-model="customStartDate"
                                 @change="changeOption"
-                                class="rounded bg-gray-800 mx-auto block text-center focus:outline-none outline-none border-0 space-y-2"
+                                class="block mx-auto space-y-2 text-center bg-gray-800 border-0 rounded outline-none focus:outline-none"
                             />
                             <input
                                 type="date"
                                 v-model="customEndDate"
                                 @change="changeOption"
-                                class="rounded bg-gray-800 mx-auto block text-center focus:outline-none outline-none border-0 space-y-2"
+                                class="block mx-auto space-y-2 text-center bg-gray-800 border-0 rounded outline-none focus:outline-none"
                             />
                         </div>
 
                         <div>
                             <button
-                                class="bg-rose-600 text-gray-200 text-center px-4 py-1 rounded"
+                                class="px-4 py-1 text-center text-gray-200 rounded bg-rose-600"
                                 type="submit"
                                 @click.prevent="reset"
                             >
@@ -114,7 +114,7 @@
                     <button
                         @click.prevent="reset"
                         type="button"
-                        class="py-2 px-4 text-sm bg-rose-800 hover:bg-rose-900 cursor-pointer font-medium whitespace-nowrap rtl:ml-2 text-white focus:outline-none rounded-lg"
+                        class="px-4 py-2 text-sm font-medium text-white rounded-lg cursor-pointer bg-rose-800 hover:bg-rose-900 whitespace-nowrap rtl:ml-2 focus:outline-none"
                     >
                         reset
                     </button>
@@ -135,13 +135,13 @@
                         class="relative overflow-y-scroll h-[77vh] scroll-smooth rounded-md"
                     >
                         <table
-                            class="w-full text-sm text-left rtl:text-right text-gray-500"
+                            class="w-full text-sm text-left text-gray-500 rtl:text-right"
                         >
                             <thead
-                                class="text-sm text-gray-500 sticky top-0 uppercase bg-gray-900"
+                                class="sticky top-0 text-sm text-gray-500 uppercase bg-gray-900"
                             >
                                 <tr
-                                    class="divide-x divide-x-reverse truncate divide-indigo-400"
+                                    class="truncate divide-x divide-x-reverse divide-indigo-400"
                                 >
                                     <th scope="col" class="px-6 py-3">
                                         جـــۆری خــەرجــی
@@ -163,21 +163,21 @@
                                 <tr
                                     v-for="item in expenses"
                                     :key="item.id"
-                                    class="bg-slate-900 border-b border-indigo-500 hover:border-y-2 hover:border-rose-800 w-full"
+                                    class="w-full border-b border-indigo-500 bg-slate-900 hover:border-y-2 hover:border-rose-800"
                                 >
                                     <th
                                         scope="row"
-                                        class="px-6 pr-0 text-center rtl:pr-3 py-2 pt-3 flex items-center space-x-3 space-x-reverse"
+                                        class="flex items-center px-6 py-2 pt-3 pr-0 space-x-3 space-x-reverse text-center rtl:pr-3"
                                     >
                                         {{ item.name }}
                                     </th>
-                                    <td class="px-6 py-4 truncate text-center">
+                                    <td class="px-6 py-4 text-center truncate">
                                         {{ item.amount.toLocaleString() }}
                                         <span class="text-indigo-500">
                                             د.ع
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 truncate text-center">
+                                    <td class="px-6 py-4 text-center truncate">
                                         {{ item.date }}
                                     </td>
                                     <td class="px-6 py-4">
@@ -204,7 +204,7 @@
 
                             <div
                                 v-else
-                                class="text-gray-400 mx-auto absolute left-0 right-0 text-center mt-24 text-lg"
+                                class="absolute left-0 right-0 mx-auto mt-24 text-lg text-center text-gray-400"
                             >
                                 هیچ خــەرجیــەک بەردەست نییــە
                             </div>
@@ -217,11 +217,10 @@
 </template>
 
 <script setup>
-import useExpenses from "@/composables/reports/expenses";
 import { onMounted, ref, watch } from "vue";
-import { initFlowbite } from "flowbite";
+
 import Nav from "./nav.vue"
-import InputSearch from "@/components/inputSearch.vue";
+import InputSearch from "@/Components/inputSearch.vue";
 
 const {
     isFormVisible,

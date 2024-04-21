@@ -1,15 +1,15 @@
 <template>
-  <div class="md:w-11/12 mx-auto  w-full">
+  <div class="w-full mx-auto md:w-11/12">
         <Breadcrumb :items="breadcrumbs" />
         <div
             class="bg-slate-700 w-full h-[90vh]  text-gray-300 rounded overflow-hidden text-center text-base p-2 m-0.5"
         >
             <div
-                class="flex items-center relative flex-wrap gap-y-2 justify-between min-w-full pb-3"
+                class="relative flex flex-wrap items-center justify-between min-w-full pb-3 gap-y-2"
             >
               
                 <div
-                    class="flex w-fit space-x-2 space-x-reverse items-center relative justify-between"
+                    class="relative flex items-center justify-between space-x-2 space-x-reverse w-fit"
                 >
                     
                     <InputSearch
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div
-                class="bg-slate-700 sm:pb-3 text-gray-300 rounded text-center text-base gap-2 overflow-auto"
+                class="gap-2 overflow-auto text-base text-center text-gray-300 rounded bg-slate-700 sm:pb-3"
             >
                 <div
                     class="relative h-[89vh] overflow-x-auto shadow-md sm:rounded-lg"
@@ -28,7 +28,7 @@
                         class="w-full text-sm text-center text-gray-500 dark:text-gray-400"
                     >
                         <thead
-                            class="text-sm text-gray-500 sticky top-0 uppercase bg-gray-900"
+                            class="sticky top-0 text-sm text-gray-500 uppercase bg-gray-900"
                         >
                             <tr class="truncate">
                                 <th scope="col" class="px-2.5 py-3">
@@ -57,18 +57,18 @@
                             <tr
                                 v-for="invoice in invoices"
                                 :key="invoice.id"
-                                class="bg-slate-900 border-b border-indigo-500 hover:border-y-2 hover:border-rose-800 w-full"
+                                class="w-full border-b border-indigo-500 bg-slate-900 hover:border-y-2 hover:border-rose-800"
                             >
                             <td
                                     scope="row"
-                                    class="px-3 py-2 truncate font-medium whitespace-nowrap"
+                                    class="px-3 py-2 font-medium truncate whitespace-nowrap"
                                 >
                                     {{ invoice.id }}
                                 </td>
                                 <td
                                 
                                     scope="row"
-                                    class="px-3 py-2 truncate font-medium whitespace-nowrap"
+                                    class="px-3 py-2 font-medium truncate whitespace-nowrap"
                                 >
                                     {{ invoice.addedBy }}
                                 </td>
@@ -115,7 +115,7 @@
                                 </td>
                                 <td class="px-3 py-2 truncate">
                                     <div
-                                        class="flex justify-around items-center space-x-2 space-x-reverse"
+                                        class="flex items-center justify-around space-x-2 space-x-reverse"
                                     >
                                         <router-link
                                             :to="{
@@ -134,7 +134,7 @@
                                                 viewBox="0 0 24 24"
                                                 stroke-width="1.5"
                                                 stroke="currentColor"
-                                                class="sm:w-5 sm:h-5 w-4 h-4 text-red-500 cursor-pointer hover:text-red-600"
+                                                class="w-4 h-4 text-red-500 cursor-pointer sm:w-5 sm:h-5 hover:text-red-600"
                                             >
                                                 <path
                                                     stroke-linecap="round"
@@ -153,19 +153,19 @@
                                     class="fixed top-0 left-0 right-0 z-50 hidden w-full pr-8 sm:pr-0 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
                                 >
                                     <div
-                                        class="relative sm:w-full w-3/4 max-w-md max-h-full"
+                                        class="relative w-3/4 max-w-md max-h-full sm:w-full"
                                     >
                                         <!-- Modal content -->
                                         {{ invoice.id }}
                                         <div
-                                            class="relative rounded-lg shadow bg-gray-800 p-5 text-center items-center"
+                                            class="relative items-center p-5 text-center bg-gray-800 rounded-lg shadow"
                                         >
                                             <svg
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke-width="1.5"
                                                 stroke="currentColor"
-                                                class="sm:w-20 sm:h-20 w-14 h-14 text-red-500 mx-auto hover:text-red-600"
+                                                class="mx-auto text-red-500 sm:w-20 sm:h-20 w-14 h-14 hover:text-red-600"
                                             >
                                                 <path
                                                     stroke-linecap="round"
@@ -174,7 +174,7 @@
                                                 />
                                             </svg>
                                             <h1
-                                                class="text-indigo-500 text-lg py-2"
+                                                class="py-2 text-lg text-indigo-500"
                                             >
                                                 سڕیــنەوە!
                                             </h1>
@@ -183,7 +183,7 @@
                                                 ؟
                                             </p>
                                             <div
-                                                class="flex items-center justify-center space-x-5 rtl:space-x-reverse py-5"
+                                                class="flex items-center justify-center py-5 space-x-5 rtl:space-x-reverse"
                                             >
                                                 <button
                                                     @click="
@@ -229,11 +229,10 @@
 </template>
 
 <script setup>
-import useInvoices from "@/composables/invoices";
 import { onMounted, ref, watch } from "vue";
-import { initFlowbite } from "flowbite";
-import Breadcrumb from "@/components/breadcrumb.vue";
-import InputSearch from "@/components/inputSearch.vue";
+
+import Breadcrumb from "@/Components/breadcrumb.vue";
+import InputSearch from "@/Components/inputSearch.vue";
 
 const breadcrumbs = [{ title: "وەسڵەکان", link: "/invoices" }];
 

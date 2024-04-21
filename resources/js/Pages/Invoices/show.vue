@@ -3,7 +3,7 @@
 <!-- <div class="bg-[#eeecf0] h-full overflow-auto w-full p-5">
         <h1 class="text-2xl font-sarchia">خواردنەکان</h1>
         <div
-            class="bg-indigo-900 text-gray-300 w-5/6 rounded mx-auto grid grid-cols-4 gap-3 p-3"
+            class="grid w-5/6 grid-cols-4 gap-3 p-3 mx-auto text-gray-300 bg-indigo-900 rounded"
         >
             <div
                 class="bg-[#1f1d2b] rounded-lg border-[1.8px] h-64 border-gray-500 flex flex-col items-center justify-between"
@@ -13,19 +13,19 @@
         </div>
     </div> -->
 <template>
-	<div class="md:w-8/12 mx-auto w-full">
+	<div class="w-full mx-auto md:w-8/12">
 		<Breadcrumb :items="breadcrumbs" />
 		<div
 			class="bg-slate-700 w-full h-[90vh] space-y-3 mx-auto text-gray-400 rounded overflow-hidden text-center text-base p-2 m-0.5"
 		>
 			<div
-				class="grid grid-rows-3 bg-gray-900 max-w-3xl mx-auto p-5 text-right rounded-md items-center space-y-4 flex-wrap text-sm dark:text-gray-400 font-semibold"
+				class="grid flex-wrap items-center max-w-3xl grid-rows-3 p-5 mx-auto space-y-4 text-sm font-semibold text-right bg-gray-900 rounded-md dark:text-gray-400"
 			>
-				<div class="flex items-center flex-wrap relative justify-between min-w-full">
+				<div class="relative flex flex-wrap items-center justify-between min-w-full">
 					<div class="space-y-4">
 						<p class="basis-full sm:basis-auto">
 							کــاشێر :
-							<span class="text-indigo-500 capitalize mb-3"> {{ invoice.addedBy }}</span>
+							<span class="mb-3 text-indigo-500 capitalize"> {{ invoice.addedBy }}</span>
 						</p>
 					</div>
 					<div class="space-y-2">
@@ -38,7 +38,7 @@
 						</p>
 					</div>
 				</div>
-				<div class="flex justify-between flex-wrap items-center">
+				<div class="flex flex-wrap items-center justify-between">
 					<p>
 						کــات و بــەروار:
 						<span class="text-indigo-500"> {{ invoice.date }}</span>
@@ -52,7 +52,7 @@
 						</span>
 					</p>
 				</div>
-				<div class="flex justify-between flex-wrap gap-2 items-center">
+				<div class="flex flex-wrap items-center justify-between gap-2">
 					<p>
 						کـــۆی گــشتی:
 						<span class="text-indigo-500">
@@ -84,7 +84,7 @@
 			>
 				<div class="relative overflow-auto sm:rounded-lg">
 					<table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-						<thead class="text-sm text-gray-500 sticky top-0 uppercase bg-gray-900">
+						<thead class="sticky top-0 text-sm text-gray-500 uppercase bg-gray-900">
 							<tr class="truncate">
 								<th scope="col" class="px-6 py-3">نــاوی خواردن</th>
 								<th scope="col" class="px-6 py-3">نــرخ</th>
@@ -96,9 +96,9 @@
 							<tr
 								v-for="food in invoice.items"
 								:key="food.id"
-								class="bg-slate-900 border-b border-indigo-500 hover:border-y-2 hover:border-rose-800 w-full"
+								class="w-full border-b border-indigo-500 bg-slate-900 hover:border-y-2 hover:border-rose-800"
 							>
-								<td scope="row" class="px-3 py-2 truncate font-medium whitespace-nowrap">
+								<td scope="row" class="px-3 py-2 font-medium truncate whitespace-nowrap">
 									{{ food.name }}
 								</td>
 								<td class="px-3 py-2 truncate">
@@ -122,11 +122,8 @@
 </template>
 
 <script setup>
-const appUrl = import.meta.env.VITE_APP_URL;
-import useCategories from "@/composables/categories";
-import useInvoices from "@/composables/invoices";
-import { useRoute } from "vue-router";
-import Breadcrumb from "@/components/breadcrumb.vue";
+
+import Breadcrumb from "@/Components/breadcrumb.vue";
 const route = useRoute();
 const breadcrumbs = [
 	{ title: "وەسڵەکان ", link: "/invoices" },

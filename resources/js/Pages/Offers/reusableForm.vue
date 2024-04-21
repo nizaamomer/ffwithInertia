@@ -2,7 +2,7 @@
 
 <template>
 	<div
-		class="bg-slate-900 min-h-screen overflow-auto w-full flex flex-col justify-center"
+		class="flex flex-col justify-center w-full min-h-screen overflow-auto bg-slate-900"
 	>
 		<div
 			class="bg-slate-700 w-full h-[98vh] grid grid-cols-5 mx-auto text-gray-300 rounded overflow-hidden text-center text-base"
@@ -11,9 +11,9 @@
 				class="bg-slate-900/90 text-gray-300 col-span-full lg:col-span-3 px-1.5 overflow-auto"
 			>
 				<div
-					class="block lg:flex space-y-2 lg:space-y-0 items-center justify-between min-w-full pb-3"
+					class="items-center justify-between block min-w-full pb-3 space-y-2 lg:flex lg:space-y-0"
 				>
-					<div class="flex justify-start items-center">sarawa</div>
+					<div class="flex items-center justify-start">sarawa</div>
 					<div class="w-full lg:w-auto">
 						<div class="relative w-full sm:w-fit">
 							<label for="table-search" class="sr-only">Search</label>
@@ -39,20 +39,20 @@
 								v-model.trim="search"
 								@input="searchFunc"
 								name="search"
-								class="block p-2 pl-10 text-sm placeholder:text-gray-500 text-gray-400 border border-rose-500/90 focus:border-rose-600 rounded-lg w-full sm:w-80 bg-gray-800 focus:bg-gray-900 focus:outline-none focus:ring-0"
+								class="block w-full p-2 pl-10 text-sm text-gray-400 bg-gray-800 border rounded-lg placeholder:text-gray-500 border-rose-500/90 focus:border-rose-600 sm:w-80 focus:bg-gray-900 focus:outline-none focus:ring-0"
 								placeholder="بگەڕێ بە دوای ..."
 							/>
 						</div>
 					</div>
 				</div>
-				<!-- <div class="flex justify-between mb-5 px-1">
+				<!-- <div class="flex justify-between px-1 mb-5">
                     <div class="">
                         <div class="text-2xl">Nizam Omer</div>
                         <p class="text-base text-gray-300">23/3/2020</p>
                     </div>
                     <div class="relative">
                         <div
-                            class="absolute inset-y-0 left-0 bottom-3 flex items-center pl-3 pointer-events-none"
+                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none bottom-3"
                         >
                             <svg
                                 class="w-5 h-5 text-gray-900 dark:text-indigo-400"
@@ -88,12 +88,12 @@
 			</div>
 
 			<div
-				class="bg-gray-900 text-gray-300 flex flex-col justify-between h-full col-span-full lg:col-span-2 overflow-auto"
+				class="flex flex-col justify-between h-full overflow-auto text-gray-300 bg-gray-900 col-span-full lg:col-span-2"
 			>
 				<div class="relative overflow-x-auto shadow-md sm:rounded-lg h-fit">
 					<table class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
 						<thead
-							class="text-xs text-center text-rose-500 sticky top-0 uppercase bg-gray-800"
+							class="sticky top-0 text-xs text-center uppercase bg-gray-800 text-rose-500"
 						>
 							<tr>
 								<th scope="col" class="px-5 py-3">جۆری خواردن</th>
@@ -108,21 +108,21 @@
 								v-if="cartItems?.length > 0"
 								v-for="item in cartItems"
 								:key="item.id"
-								class="bg-slate-900 border-b border-gray-500 text-center text-gray-300 hover:bg-gray-900"
+								class="text-center text-gray-300 border-b border-gray-500 bg-slate-900 hover:bg-gray-900"
 							>
 								<th
 									scope="row"
-									class="ps-2 py-3 w-1/5 font-medium text-left rtl:text-right text-gray-300"
+									class="w-1/5 py-3 font-medium text-left text-gray-300 ps-2 rtl:text-right"
 								>
-									<div class="overflow-auto whitespace-nowrap w-24">
+									<div class="w-24 overflow-auto whitespace-nowrap">
 										{{ item.name }}
 									</div>
 								</th>
 
-								<td class="px-2 py-3 flex justify-center items-center">
+								<td class="flex items-center justify-center px-2 py-3">
 									<button
 										@click="offerStore.decreaseQuantity(item.id)"
-										class="bg-red-300 text-red-700 rounded p-1 cursor-pointer"
+										class="p-1 text-red-700 bg-red-300 rounded cursor-pointer"
 									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@
 									</span>
 									<button
 										@click="offerStore.increaseQuantity(item.id)"
-										class="bg-blue-300 text-blue-700 rounded p-1 cursor-pointer"
+										class="p-1 text-blue-700 bg-blue-300 rounded cursor-pointer"
 									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +186,7 @@
 											viewBox="0 0 24 24"
 											stroke-width="1.5"
 											stroke="currentColor"
-											class="sm:w-5 sm:h-5 w-4 h-4 text-red-500 cursor-pointer hover:text-red-600"
+											class="w-4 h-4 text-red-500 cursor-pointer sm:w-5 sm:h-5 hover:text-red-600"
 										>
 											<path
 												stroke-linecap="round"
@@ -200,7 +200,7 @@
 
 							<tr v-else>
 								<div
-									class="text-gray-400 dark:text-gray-400 text-center absolute top-36 left-1/2 transform -translate-x-1/2 text-sm"
+									class="absolute text-sm text-center text-gray-400 transform -translate-x-1/2 dark:text-gray-400 top-36 left-1/2"
 								>
 									هیچ خواردننێک زیاد نەکراوە
 								</div>
@@ -211,7 +211,7 @@
 
 				<form
 					@submit.prevent="payment"
-					class="bg-slate-950 grid grid-cols-1 sm:grid-cols-2 text-right rounded-t-md p-2 gap-y-5 gap-x-0 py-3 pb-5"
+					class="grid grid-cols-1 p-2 py-3 pb-5 text-right bg-slate-950 sm:grid-cols-2 rounded-t-md gap-y-5 gap-x-0"
 				>
 					<div>
 						<label for="name" class="text-sm font-medium text-gray-400">
@@ -222,7 +222,7 @@
 							type="text"
 							id="name"
 							v-model="form.name"
-							class="bg-slate-800 focus:bg-gray-900 border placeholder:text-gray-500 border-none w-4/5 text-gray-300 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 block py-2"
+							class="block w-4/5 py-2 text-sm text-gray-300 border border-none rounded-lg bg-slate-800 focus:bg-gray-900 placeholder:text-gray-500 focus:ring-rose-500 focus:border-rose-500"
 							placeholder="ئۆفەری خێزانی"
 						/>
 					</div>
@@ -235,7 +235,7 @@
 							type="number"
 							id="price"
 							v-model="form.price"
-							class="bg-slate-800 focus:bg-gray-900 border placeholder:text-gray-500 border-none w-4/5 text-gray-300 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 block py-2"
+							class="block w-4/5 py-2 text-sm text-gray-300 border border-none rounded-lg bg-slate-800 focus:bg-gray-900 placeholder:text-gray-500 focus:ring-rose-500 focus:border-rose-500"
 							placeholder="12500"
 						/>
 					</div>
@@ -248,7 +248,7 @@
 							type="number"
 							id="note"
 							v-model="form.description"
-							class="bg-slate-800 w-4/5 focus:bg-gray-900 resize-none border border-none text-gray-300 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 block py-2 h-11"
+							class="block w-4/5 py-2 text-sm text-gray-300 border border-none rounded-lg resize-none bg-slate-800 focus:bg-gray-900 focus:ring-rose-500 focus:border-rose-500 h-11"
 							placeholder="..."
 						/>
 					</div>
@@ -259,7 +259,7 @@
 						<select
 							id="status"
 							v-model="form.status"
-							class="bg-slate-800 focus:bg-gray-900 w-4/5 border border-none text-gray-300 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 block py-3"
+							class="block w-4/5 py-3 text-sm text-gray-300 border border-none rounded-lg bg-slate-800 focus:bg-gray-900 focus:ring-rose-500 focus:border-rose-500"
 						>
 							<option value="active">چــالاک</option>
 							<option value="inactive">نــا چــالاک</option>
@@ -268,7 +268,7 @@
 
 					<div class="flex justify-between px-2">
 						<div class="flex items-center">
-							<div class="dark:text-gray-400 text-base">
+							<div class="text-base dark:text-gray-400">
 								کۆی گشتی:
 								{{ totalAmount ? totalAmount.toLocaleString() : "" }}
 
@@ -295,15 +295,13 @@
 	</div>
 </template>
 <script setup>
-import useOffers from "@/composables/offers";
-import { initFlowbite } from "flowbite";
+
 import { computed, onBeforeMount, ref, watch } from "vue";
-import { useRoute } from "vue-router";
-import usePos from "@/composables/pos";
+
 import { useOfferCartStore } from "@/stores/offerCartStore";
 const offerStore = useOfferCartStore();
 
-import SmallCard from "@/components/smallCard.vue";
+import SmallCard from "@/Components/smallCard.vue";
 const route = useRoute();
 onBeforeMount(() => {
 	if (route.params.id) {

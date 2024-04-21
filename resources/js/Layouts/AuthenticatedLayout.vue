@@ -179,8 +179,8 @@
                     </Link>
 
                     <Link
-                    :href="route('categories.index')"
-                                            active-class="text-indigo-500 bg-slate-800"
+                        :href="route('categories.index')"
+                        active-class="text-indigo-500 bg-slate-800"
                         class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
                         <div>
@@ -322,7 +322,7 @@
                         <div v-if="asideShow">فــرۆشراوەکان</div>
                     </Link>
                     <Link
-                        :href="{ name: 'expense.index' }"
+                        :href="route('expenses.index')"
                         active-class="text-indigo-500 bg-slate-800"
                         class="flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-slate-800"
                     >
